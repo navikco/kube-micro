@@ -16,10 +16,10 @@ jobs:
 #          key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - run:
           name: Install dependencies
-          command: mkdir -p /opt/mw/app/kube/
+          command: sudo mkdir -p /opt/mw/app/kube/ && chmod 777 -R /opt/mw/app/kube/
       - run:
           name: Install dependencies
-          command: mkdir -p /opt/mw/mount/logs/kube/
+          command: sudo mkdir -p /opt/mw/mount/logs/kube/ && chmod 777 -R /opt/mw/mount/logs/kube/
       - run:
           name: Install dependencies
           command: cp apps/admin/src/main/resources/logback-spring.xml /opt/mw/app/kube/logback-spring.xml
