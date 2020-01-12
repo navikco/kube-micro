@@ -17,6 +17,12 @@ jobs:
       - run:
           name: Install dependencies
           command: cd apps/admin && ./gradlew clean build
+      - run:
+          name: Install dependencies
+          command: cd apps/customers && ./gradlew clean build
+      - run:
+          name: Install dependencies
+          command: cd apps/users && ./gradlew clean build
 #      - save_cache:
 #          paths:
 #            - ~/.gradle/wrapper
