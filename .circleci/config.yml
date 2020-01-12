@@ -7,7 +7,7 @@ jobs:
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
-    working_directory: $CIRCLE_WORKING_DIRECTORY/apps/admin/
+    working_directory: apps/admin/
     steps:
       - checkout
       - restore_cache:
