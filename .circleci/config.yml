@@ -37,7 +37,7 @@ jobs:
       # build and push Docker image
 #          name: Kube Docker Build
 #          command: cd apps/toolbox/kube/docker/build
-      - run: |
+      - run:
           name: Build Kube Docker Image
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
