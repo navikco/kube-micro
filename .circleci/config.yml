@@ -10,21 +10,21 @@ jobs:
 #    working_directory: apps/admin/
     steps:
       - checkout
-      - restore_cache:
-          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - restore_cache:
-          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+#      - restore_cache:
+#          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+#      - restore_cache:
+#          key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - run:
           name: Install dependencies
           command: cd apps/admin && ./gradlew clean build --scan -s
-      - save_cache:
-          paths:
-            - ~/.gradle/wrapper
-          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - save_cache:
-          paths:
-            - ~/.gradle/caches
-          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+#      - save_cache:
+#          paths:
+#            - ~/.gradle/wrapper
+#          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+#      - save_cache:
+#          paths:
+#            - ~/.gradle/caches
+#          key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - persist_to_workspace:
           root: .
           paths:
