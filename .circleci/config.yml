@@ -16,7 +16,7 @@ jobs:
 #          key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - run:
           name: Install dependencies
-          command: pwd && cd apps/admin && pwd && ls -al && ./gradlew clean build --scan -s
+          command: pwd && cd apps/admin && pwd && ls -al && gradle wrapper && ./gradlew clean build --scan -s
 #      - save_cache:
 #          paths:
 #            - ~/.gradle/wrapper
