@@ -43,6 +43,7 @@ jobs:
             TAG=1.0.0_$CIRCLE_BUILD_NUM
             cd apps/toolbox/kube/docker/build/
             docker build --build-arg kubeMicroservice=admin -t navikco/kube:admin-${TAG} .
+            docker login --username=navikco --password=Frisc0tx!
             docker push navikco/kube:admin-${TAG}
 #            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
 #          docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
