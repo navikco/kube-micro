@@ -25,7 +25,7 @@ jobs:
           command: cp apps/admin/src/main/resources/logback-spring.xml /opt/mw/app/kube/logback-spring.xml
       - run:
           name: Kube Admin CI
-          command: cd apps/admin && ./gradlew clean build && cp build/libs/*.jar apps/toolbox/kube/docker/build/
+          command: cd apps/admin && ./gradlew clean build && cp build/libs/*.jar ../toolbox/kube/docker/build/
 #      - run:
 #          name: Kube Customers CI
 #          command: cd apps/customers && ./gradlew clean build
