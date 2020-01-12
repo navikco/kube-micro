@@ -1,0 +1,122 @@
+spring:
+  adminServer:
+    host: localhost
+    port: 8761
+  main:
+    allow-bean-definition-overriding: true
+  boot:
+    admin:
+      context-path: /admin
+      ui:
+        brand: <img src="banner.jpg"><span><font color="green">Kube Land Microservices Dashboard</font></span>
+      discovery:
+        converter:
+          management-context-path: /
+  security:
+    enabled: false
+
+#      client:
+#        url: http://localhost:8080
+#        username: kubeadmin       #These two are needed so that the client
+#        password: welcome1   #can register at the protected server api
+#        instance:
+#          service-base-url: http://localhost:8080
+#          metadata:
+#            user.name: kubeadmin         #These two are needed so that the server
+#            user.password: welcome1 #can access the protected client endpoints
+#  security:
+#    user:
+#      name: kubeadmin
+#      password: welcome1
+
+management:
+  security:
+    enabled: false
+  info:
+    git:
+      mode: full
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /
+      path-mapping:
+        health: health
+        info: info
+        metrics: metrics
+    jmx:
+      enabled: true
+      exposure:
+        include: "*"
+    health:
+      show-details: ALWAYS
+
+logging.level.org: INFO
+logging.level.net.kube.land: DEBUG
+logging.level.org.springframework.boot.SpringApplication: INFO
+logging.level.org.springframework.cloud.config.client.ConfigServicePropertySourceLocator: DEBUG
+logging.level.org.springframework.cloud.bootstrap.config.PropertySourceBootstrapConfiguration: DEBUG
+
+info:
+  General:
+    Environment: ${spring.profiles.active}
+    GIT Repo: 'http://es-bitbucket01.dal.securustech.net/projects/MID/repos/ews-admin/browse'
+
+eureka:
+  server:
+    host: ${KUBE_ADMIN_HOST}
+    port: ${KUBE_ADMIN_PORT}
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 30
+    health-check-url-path: /health
+#    metadata-map:
+#      user.name: kubeadmin
+#      user.password: welcome1
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+zuul:
+  host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+  retryable: true
+  routes:
+    users:
+      path: /kube/users/**
+      stripPrefix: false
+    roles:
+      path: /kube/roles/**
+      stripPrefix: false
+    customers:
+      path: /kube/customers/**
+      stripPrefix: false
+    products:
+      path: /kube/products/**
+      stripPrefix: false
+    orders:
+      path: /kube/orders/**
+      stripPrefix: false
+    invoices:
+      path: /kube/invoices/**
+      stripPrefix: false
+    carts:
+      path: /kube/carts/**
+      stripPrefix: false
+    payments:
+      path: /kube/payments/**
+      stripPrefix: false
+    subscriptions:
+      path: /kube/subscriptions/**
+      stripPrefix: false
+    services:
+      path: /kube/services/**
+      stripPrefix: false
+    lists:
+      path: /kube/lists/**
+      stripPrefix: false
+    accounts:
+      path: /kube/accounts/**
+      stripPrefix: false

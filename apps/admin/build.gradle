@@ -1,0 +1,263 @@
+import java.util.regex.Matcher
+
+buildscript {
+
+    String buildNumber = System.getProperty("buildNumber")
+    if (buildNumber == null) {
+
+        buildNumber = System.getenv('buildNumber')
+    }
+    if (buildNumber == null) {
+
+        buildNumber = "0"
+    }
+
+    ext {
+        springBootVersion = '2.2.1.RELEASE'
+        springCloudVersion = '2.2.1.RELEASE'
+        springBootAdminVersion = '2.2.1'
+
+        kubeBuildNumber = buildNumber
+        buildTime = new Date().format("yyyy-MM-dd HH:mm:ss")
+        gitTagName = project.version
+    }
+
+    println "BuildNumber >>> " + kubeBuildNumber
+    println "BuildTime >>> " + buildTime
+
+    repositories {
+
+        mavenLocal()
+        mavenCentral()
+
+        maven {
+
+            url "http://repository.jboss.org/nexus/content/groups/public/"
+        }
+        maven {
+
+            url "http://repo.spring.io/milestone/"
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+
+            url "http://www.datanucleus.org/downloads/maven2/"
+        }
+        maven {
+
+            url "http://repo.spring.io/libs-milestone/"
+        }
+        maven {
+
+            url "https://artifacts.alfresco.com/nexus/content/groups/public/"
+        }
+        maven {
+
+            url 'https://repo.adobe.com/nexus/content/repositories/public/'
+        }
+    }
+
+    dependencies {
+
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: "${springBootVersion}"
+        classpath "org.hibernate.build.gradle:gradle-maven-publish-auth:2.0.1"
+        classpath "net.linguica.gradle:maven-settings-plugin:0.5"
+        classpath "gradle.plugin.com.palantir.gradle.gitversion:gradle-git-version:0.11.0"
+        classpath "net.researchgate:gradle-release:2.8.0"
+        classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:2.0.0"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.7.RELEASE"
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'jacoco'
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: "org.springframework.boot"
+
+apply plugin: org.hibernate.build.gradle.publish.auth.maven.AuthenticationManager
+apply plugin: io.spring.gradle.dependencymanagement.DependencyManagementPlugin
+apply plugin: net.linguica.gradle.maven.settings.MavenSettingsPlugin
+apply plugin: net.researchgate.release.ReleasePlugin
+apply plugin: com.palantir.gradle.gitversion.GitVersionPlugin
+apply plugin: com.gorylenko.GitPropertiesPlugin
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+springBoot {
+
+    buildInfo {
+        properties {
+            additional = [
+                    'KubeBuildNumber': project.kubeBuildNumber,
+                    'BuildTime'      : project.buildTime
+            ]
+        }
+    }
+}
+
+def details = versionDetails()
+
+println "|||GIT State||| :-> $project.name"
+println "<<<"
+println "\tProject Name :-> $project.name"
+println "\tProject Version :-> $project.version"
+println "\tBuild No# :-> $project.kubeBuildNumber"
+//println "\tGIT Latest TAG :-> " + details.lastTag
+println "\tNEW GIT <<<TAG Name>>> :-> $project.gitTagName"
+//println "\tGIT Commit Distance :-> " + details.commitDistance
+println "\tGIT Hash :-> " + details.gitHash
+println "\tGIT Branch Name :-> " + details.branchName
+println "\tGIT Branch is Clean for New TAG??? :-> " + details.isCleanTag
+println ">>>"
+
+println "CALLER@Gradle@buildNumber >>> " + project.kubeBuildNumber
+println "CALLER@Gradle@BuildTime >>> " + project.buildTime
+println "CALLER@Gradle@GitTagName >>> " + project.gitTagName
+
+repositories {
+
+    mavenLocal()
+    mavenCentral()
+
+    maven {
+
+        url "https://artifacts.alfresco.com/nexus/content/groups/public/"
+    }
+    maven {
+
+        url 'https://repo.adobe.com/nexus/content/repositories/public/'
+    }
+    maven {
+
+        url "http://repo.spring.io/milestone/"
+    }
+    maven {
+
+        url "http://repo.spring.io/libs-milestone/"
+    }
+    maven {
+        url "https://repo.gradle.org/gradle/libs-releases-local/"
+    }
+}
+
+dependencies {
+
+    compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${springCloudVersion}")
+
+    compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:${springCloudVersion}")
+
+    compile("org.springframework.cloud:spring-cloud-starter-netflix-zuul:${springCloudVersion}")
+
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+
+    compile("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
+
+    compile("de.codecentric:spring-boot-admin-server-cloud:${springBootAdminVersion}")
+
+    compile("de.codecentric:spring-boot-admin-starter-server:${springBootAdminVersion}")
+}
+
+configurations.all {
+
+    exclude module: 'slf4j-log4j12'
+    exclude group: 'javax.servlet', module: 'servlet-api'
+}
+
+gitProperties {
+    dateFormat = "yyyy-MM-dd HH:mm:ss"
+    dateFormatTimeZone = "CST"
+}
+
+processResources {
+    filesMatching('bootstrap.yml') {
+        expand(project.properties)
+    }
+}
+
+bootRun {
+
+    systemProperties System.properties
+}
+
+println "CALLER@Gradle@buildNumber >>> " + project.kubeBuildNumber
+println "CALLER@Gradle@BuildTime >>> " + project.buildTime
+println "CALLER@Gradle@GitTagName >>> " + project.gitTagName
+
+//####################################################
+//RELEASE the NEW Version and Create Git Tag for it...
+//####################################################
+
+afterReleaseBuild.dependsOn publish
+
+release {
+
+//    gitTagName = details.branchName + "/" + '$version' + "/" + buildNumber
+    gitTagName = "develop/" + '$version' + "/" + project.kubeBuildNumber
+    println "RELEASE@GitTagName >>> " + gitTagName
+
+    failOnCommitNeeded = false
+    failOnPublishNeeded = false
+    failOnSnapshotDependencies = true
+    failOnUnversionedFiles = true
+    failOnUpdateNeeded = true
+    revertOnFail = true
+    preCommitText = 'Build# ' + project.kubeBuildNumber
+//    preTagCommitMessage = "Release Tag for [[[$artifactId]]] Committed on Branch ::: [[[" + details.branchName + "]]] ::: "
+    preTagCommitMessage = "Release Tag for [[[$artifactId]]] Committed on Branch ::: [[[ develop ]]] ::: "
+    tagCommitMessage = "$artifactId : $version - Creating Git Tag :-> "
+//    newVersionCommitMessage = "Version Upgraded to NEXT SNAPSHOT for [[[$artifactId]]] ::: [[[" + details.branchName + "]]] ::: "
+    newVersionCommitMessage = "Version Upgraded to NEXT SNAPSHOT for [[[$artifactId]]] ::: [[[ develop ]]] ::: "
+    tagTemplate = gitTagName
+    versionPropertyFile = 'gradle.properties'
+    versionProperties = []
+    buildTasks = ['build']
+    versionPatterns = [
+            /(\d+)([^\d]*$)/: { Matcher m, Project p -> m.replaceAll("${(m[0][1] as int) + 1}${m[0][2]}") }
+    ]
+    scmAdapters = [
+            net.researchgate.release.GitAdapter
+    ]
+
+//    git {
+//        requireBranch = details.branchName
+//        pushToRemote = 'origin'
+//        pushToBranchPrefix = ''
+//        commitVersionFileOnly = false
+//        signTag = false
+//    }
+}
+
+//######################################################
+//NEXUS Upload/Publish Artifacts for NEW Release Version
+//######################################################
+
+
+publishing {
+
+    publications {
+
+        mavenJava(MavenPublication) {
+
+            groupId = project.groupId
+            artifactId = project.artifactId
+            version = version + "_" + project.kubeBuildNumber
+            println "PUBLISH@NexusProjectVersion >>> " + project.version
+            println "PUBLISH@NexusVersion >>> " + version
+
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+
+            name "nexus"
+            url "http://es-nexus01.dal.securustech.net/content/repositories/releases/"
+        }
+    }
+}

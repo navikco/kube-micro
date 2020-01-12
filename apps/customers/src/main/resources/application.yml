@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: customers
+    restDocName: customers
+  adminServer:
+    host: ${KUBE_ADMIN_HOST}
+    port: ${KUBE_ADMIN_PORT}
+  boot:
+    admin:
+      context-path: /admin
+      discovery:
+        converter:
+          management-context-path: /
+  security:
+    enabled: false
+
+management:
+  security:
+    enabled: false
+  info:
+    git:
+      mode: full
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /
+      path-mapping:
+        health: health
+        info: info
+        metrics: metrics
+    jmx:
+      enabled: true
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+logging.level.org: ERROR
+logging.level.com: ERROR
+logging.level.net.kube.land: DEBUG
+logging.level.org.springframework.boot.SpringApplication: INFO
+logging.level.org.springframework.cloud.config.client.ConfigServicePropertySourceLocator: DEBUG
+logging.level.org.springframework.cloud.bootstrap.config.PropertySourceBootstrapConfiguration: DEBUG
+
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 30
+    health-check-url-path: /health
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://${KUBE_ADMIN_HOST}:${KUBE_ADMIN_PORT}/eureka/
+
+info:
+  General:
+    Environment: ${spring.profiles.active}
+    Rest_API_Doc: http://${spring.adminServer.host}:${spring.adminServer.port}/kube/${spring.application.restDocName}/info/index.html
+    Endpoint(s):
+      - http://${spring.adminServer.host}:${spring.adminServer.port}/kube/${spring.application.restDocName}
+      - http://${spring.adminServer.host}:${spring.adminServer.port}/kube/${spring.application.restDocName}/{CUSTOMER_ID}
+    GIT Repo: 'http://es-bitbucket01.dal.securustech.net/projects/MID/repos/ews-customers/browse'

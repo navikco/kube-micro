@@ -1,0 +1,274 @@
+buildscript {
+
+    String buildNumber = System.getProperty("buildNumber")
+    if (buildNumber == null) {
+
+        buildNumber = System.getenv('buildNumber')
+    }
+    if (buildNumber == null) {
+
+        buildNumber = "0"
+    }
+
+    ext {
+        springBootVersion = '2.2.1.RELEASE'
+        springCloudVersion = '2.2.1.RELEASE'
+        springBootAdminVersion = '2.2.1'
+
+        kubeBuildNumber = buildNumber
+        buildTime = new Date().format("yyyy-MM-dd HH:mm:ss")
+        gitTagName = project.version
+    }
+
+    println "BuildNumber >>> " + kubeBuildNumber
+    println "BuildTime >>> " + buildTime
+
+    repositories {
+
+        mavenLocal()
+        mavenCentral()
+
+        maven {
+
+            url "http://repository.jboss.org/nexus/content/groups/public/"
+        }
+        maven {
+
+            url "http://repo.spring.io/milestone/"
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+
+            url "http://www.datanucleus.org/downloads/maven2/"
+        }
+        maven {
+
+            url "http://repo.spring.io/libs-milestone/"
+        }
+        maven {
+
+            url "https://artifacts.alfresco.com/nexus/content/groups/public/"
+        }
+        maven {
+
+            url 'https://repo.adobe.com/nexus/content/repositories/public/'
+        }
+    }
+
+    dependencies {
+
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: "${springBootVersion}"
+        classpath "org.hibernate.build.gradle:gradle-maven-publish-auth:2.0.1"
+        classpath "net.linguica.gradle:maven-settings-plugin:0.5"
+        classpath "gradle.plugin.com.palantir.gradle.gitversion:gradle-git-version:0.11.0"
+        classpath "net.researchgate:gradle-release:2.8.0"
+        classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:2.0.0"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.7.RELEASE"
+        classpath "org.asciidoctor:asciidoctor-gradle-plugin:1.5.6"
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'jacoco'
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: "org.springframework.boot"
+
+apply plugin: org.hibernate.build.gradle.publish.auth.maven.AuthenticationManager
+apply plugin: io.spring.gradle.dependencymanagement.DependencyManagementPlugin
+apply plugin: net.linguica.gradle.maven.settings.MavenSettingsPlugin
+apply plugin: net.researchgate.release.ReleasePlugin
+apply plugin: com.gorylenko.GitPropertiesPlugin
+apply plugin: com.palantir.gradle.gitversion.GitVersionPlugin
+apply plugin: org.asciidoctor.gradle.AsciidoctorPlugin
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+springBoot {
+
+    buildInfo {
+        properties {
+            additional = [
+                    'KubeBuildNumber': project.kubeBuildNumber,
+                    'BuildTime'      : project.buildTime
+            ]
+        }
+    }
+}
+
+
+def details = versionDetails()
+
+println "|||GIT State||| :-> $project.name"
+println "<<<"
+println "\tProject Name :-> $project.name"
+println "\tProject Version :-> $project.version"
+println "\tBuild No# :-> $project.kubeBuildNumber"
+//println "\tGIT Latest TAG :-> " + details.lastTag
+println "\tNEW GIT <<<TAG Name>>> :-> $project.gitTagName"
+//println "\tGIT Commit Distance :-> " + details.commitDistance
+println "\tGIT Hash :-> " + details.gitHash
+println "\tGIT Branch Name :-> " + details.branchName
+println "\tGIT Branch is Clean for New TAG??? :-> " + details.isCleanTag
+println ">>>"
+
+println "CALLER@Gradle@buildNumber >>> " + project.kubeBuildNumber
+println "CALLER@Gradle@BuildTime >>> " + project.buildTime
+println "CALLER@Gradle@GitTagName >>> " + project.gitTagName
+
+repositories {
+
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+
+    maven {
+
+        url "http://repository.jboss.org/nexus/content/groups/public/"
+    }
+    maven {
+
+        url "http://repo.spring.io/milestone/"
+    }
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+    maven {
+
+        url "http://www.datanucleus.org/downloads/maven2/"
+    }
+    maven {
+
+        url "http://repo.spring.io/libs-milestone/"
+    }
+    maven {
+
+        url "https://artifacts.alfresco.com/nexus/content/groups/public/"
+    }
+    maven {
+
+        url 'https://repo.adobe.com/nexus/content/repositories/public/'
+    }
+}
+
+dependencies {
+
+    compile group: 'org.json', name: 'json', version: '20190722'
+
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+
+    compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${springCloudVersion}")
+
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+
+    compile("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+
+
+    compile 'org.glassfish.jersey.inject:jersey-hk2:2.26'
+    compile('org.glassfish.jersey.core:jersey-client')
+    compile('org.jolokia:jolokia-core')
+
+    //compile group: "com.h2database", name: "h2"
+    compile('org.apache.commons:commons-lang3')
+    compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: '2.10.1'
+    compile('org.hibernate.validator:hibernate-validator')
+    compile('javax.validation:validation-api')
+
+    testCompile("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
+    testCompile("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("junit:junit:4.12")
+    testCompile group: 'org.springframework', name: 'spring-test', version: '5.1.8.RELEASE'
+}
+
+String restDoc = null
+if (project.hasProperty("restDocRoot")) {
+
+    restDoc = restDocRoot
+}
+println "|||asciidoc.gradle@restDocRoot||| :-> $restDoc"
+
+String snippets = null
+if (project.hasProperty("snippetsDir")) {
+
+    snippets = snippetsDir
+}
+println "|||asciidoc.gradle@snippetsDir||| :-> $snippets"
+
+String restDocOutputDir = null
+if (project.hasProperty("outDir")) {
+
+    restDocOutputDir = outDir
+}
+println "|||asciidoc.gradle@outDir||| :-> $restDocOutputDir"
+
+ext {
+
+    snippets = file("$buildDir/generated-snippets")
+    restDocOutputDir = file("$buildDir/asciidoc")
+}
+
+test {
+    outputs.dir snippets
+    systemProperties System.properties
+}
+
+bootJar {
+
+    println "JAR : RestDocRoot :-> $restDocRoot"
+    println "JAR : Base Name :-> " + baseName
+    println "JAR : Project Name :-> $project.name"
+    println "JAR : Project Version :-> $project.version"
+    println "JAR : OutDir :-> $buildDir/asciidoc"
+
+    dependsOn asciidoctor
+
+    from("$buildDir/asciidoc/html5") {
+
+        into "static/kube/$restDocRoot/info"
+    }
+}
+
+asciidoctor {
+
+    if (!project.name.equalsIgnoreCase("repository")) {
+
+        println "ASCII-Doc : SnippetsDir :-> " + snippets
+        println "ASCII-Doc : BuildDir :-> $buildDir"
+        println "ASCII-Doc : OutDir :-> " + restDocOutputDir
+        println "ASCII-Doc : RestDocRoot :-> $restDoc"
+        println "ASCII-Doc : ProjectName :-> $project.name"
+        println "ASCII-Doc : BuildNumber ::: >>> " + project.kubeBuildNumber
+        println "ASCII-Doc : BuildTime ::: >>> " + project.buildTime
+        println "ASCII-Doc : GitTAG ::: >>> " + project.gitTagName
+    }
+
+    attributes 'snippets': snippets
+    inputs.dir snippets
+    outputDir restDocOutputDir
+    dependsOn test
+    sourceDir 'src/main/asciidoc'
+
+    doLast {
+
+        def props = new Properties()
+        def propertyFile = file "build/resources/main/git.properties"
+        props.load(new FileReader(propertyFile))
+        props.setProperty("git.tag", project.gitTagName)
+
+        def writer = new FileWriter(propertyFile)
+        try {
+            props.store(writer, 'Newly appended contents')
+            writer.flush()
+        } finally {
+            writer.close()
+        }
+    }
+}

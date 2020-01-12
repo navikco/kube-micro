@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: admin
+  profiles:
+    active: local
+
+logging:
+  file: "/opt/mw/mount/logs/kube/\${spring.application.name}/\${spring.cloud.client.ip-address}/\${spring.application.name}.log"
+  config: /opt/mw/app/kube/logback-spring.xml
+#  file: "./logs/\${spring.application.name}/\${spring.cloud.client.ip-address}/\${spring.application.name}.log"
+#  config: ./src/main/resources/logback-spring.xml
+
+server:
+  port: ${PORT:8761}
+
+---
