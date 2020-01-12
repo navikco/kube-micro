@@ -15,20 +15,6 @@ spring:
   security:
     enabled: false
 
-#      client:
-#        url: http://localhost:8080
-#        username: kubeadmin       #These two are needed so that the client
-#        password: welcome1   #can register at the protected server api
-#        instance:
-#          service-base-url: http://localhost:8080
-#          metadata:
-#            user.name: kubeadmin         #These two are needed so that the server
-#            user.password: welcome1 #can access the protected client endpoints
-#  security:
-#    user:
-#      name: kubeadmin
-#      password: welcome1
-
 management:
   security:
     enabled: false
@@ -60,7 +46,7 @@ logging.level.org.springframework.cloud.bootstrap.config.PropertySourceBootstrap
 info:
   General:
     Environment: ${spring.profiles.active}
-    GIT Repo: 'http://es-bitbucket01.dal.securustech.net/projects/MID/repos/ews-admin/browse'
+    GIT Repo: 'https://github.com/navikco/kube/tree/master/apps/admin'
 
 eureka:
   server:
@@ -70,9 +56,6 @@ eureka:
     preferIpAddress: true
     leaseRenewalIntervalInSeconds: 30
     health-check-url-path: /health
-#    metadata-map:
-#      user.name: kubeadmin
-#      user.password: welcome1
   client:
     registryFetchIntervalSeconds: 5
     serviceUrl:

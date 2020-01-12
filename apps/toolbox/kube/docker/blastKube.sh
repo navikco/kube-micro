@@ -2,7 +2,7 @@
 
 set -e
 
-if [ $# -eq 6 ]
+if [ $# -eq 4 ]
 then
 
     ENVIRONMENT=${1}
@@ -17,14 +17,14 @@ then
     VERSION=${4}
     echo "VERSION :::>>> ${VERSION}"
 
-    DOCKER_REGISTRY_HOST=${5}
-    echo "DOCKER_REGISTRY_HOST :::>>> ${DOCKER_REGISTRY_HOST}"
+#    DOCKER_REGISTRY_HOST=${5}
+#    echo "DOCKER_REGISTRY_HOST :::>>> ${DOCKER_REGISTRY_HOST}"
 
-    DOCKER_REGISTRY_PORT=${6}
-    echo "DOCKER_REGISTRY_PORT :::>>> ${DOCKER_REGISTRY_PORT}"
+#    DOCKER_REGISTRY_PORT=${6}
+#    echo "DOCKER_REGISTRY_PORT :::>>> ${DOCKER_REGISTRY_PORT}"
 
 else
-    echo "Usage: . ./blastKUBE.sh <<ENVIRONMENT>> <<MICROSERVICE>> <<PORT>> <<VERSION>> <<DOCKER_REGISTRY_HOST>> <<DOCKER_REGISTRY_PORT>>"
+    echo "Usage: . ./blastKUBE.sh <<ENVIRONMENT>> <<MICROSERVICE>> <<PORT>> <<VERSION>>"
     exit 1
 fi
 
@@ -80,15 +80,19 @@ chmod 700 ${KUBE_TOOLBOX_HOME}/build/*.jar
 cd ${KUBE_TOOLBOX_HOME}/build/
 
 echo "BUILDING :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]] in [[[ " + ${ENVIRONMENT} + " ]]]..."
-docker build --build-arg kubeMicroservice=${MICROSERVICE} -t ${DOCKER_REGISTRY_HOST}:${DOCKER_REGISTRY_PORT}/${MICROSERVICE}:${VERSION} .
+#docker build --build-arg kubeMicroservice=${MICROSERVICE} -t ${DOCKER_REGISTRY_HOST}:${DOCKER_REGISTRY_PORT}/${MICROSERVICE}:${VERSION} .
+docker build --build-arg kubeMicroservice=${MICROSERVICE} -t navikco/kube:${MICROSERVICE}-${VERSION} .
 echo "BUILT :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]] in [[[ " + ${ENVIRONMENT} + " ]]]..."
 
 docker ps
 
 docker images
 
+docker login --username=navikco --password=Frisc0tx!
+
 echo "PUSHING :::>>> KUBE Docker Image to Docker Registry ::: [[[ " + ${MICROSERVICE} + " ]]]..."
-docker push ${DOCKER_REGISTRY_HOST}:${DOCKER_REGISTRY_PORT}/${MICROSERVICE}:${VERSION}
+#docker push ${DOCKER_REGISTRY_HOST}:${DOCKER_REGISTRY_PORT}/${MICROSERVICE}:${VERSION}
+docker push navikco/kube:${MICROSERVICE}-${VERSION}
 echo "PUSHED :::>>> KUBE Docker Image to Docker Registry ::: [[[ " + ${MICROSERVICE} + " ]]]..."
 
 #Remove LOCAL Docker KUBE Image
@@ -105,7 +109,7 @@ docker run -dti \
     --memory="1g" --memory-swap="2g" \
     --name ${MICROSERVICE}-${VERSION} \
 	--mount type=bind,source="${KUBE_DOCKER_HOST_HOME}/mount",target=/opt/mw/mount \
-    ${DOCKER_REGISTRY_HOST}:${DOCKER_REGISTRY_PORT}/${MICROSERVICE}:${VERSION} ${ENVIRONMENT} ${MICROSERVICE} ${INSTANCE} 8761
+    navikco/kube:${MICROSERVICE}-${VERSION} ${ENVIRONMENT} ${MICROSERVICE} ${INSTANCE} 8761
 echo "STARTED :::>>> KUBE Docker Container ::: [[[ " + ${MICROSERVICE} + " ]]] in [[[ " + ${ENVIRONMENT} + " ]]]..."
 
 docker ps
@@ -117,7 +121,3 @@ docker exec -it ${MICROSERVICE}-${VERSION} bash
 
 ###FOR WINDOWS GIT BASH###
 #winpty docker exec -it wlsadmin bash
-
-Himanshu - 3763 - XS - 357205095529495
-Prarthana - 7858 - 8 - 354877090170815
-Krunal - 8933 - 8P - 359499086347854

@@ -61,4 +61,4 @@ info:
     Endpoint(s):
       - http://${spring.adminServer.host}:${spring.adminServer.port}/kube/${spring.application.restDocName}
       - http://${spring.adminServer.host}:${spring.adminServer.port}/kube/${spring.application.restDocName}/{CUSTOMER_ID}
-    GIT Repo: 'http://es-bitbucket01.dal.securustech.net/projects/MID/repos/ews-customers/browse'
+    GIT Repo: 'https://github.com/navikco/kube/tree/master/apps/customers'

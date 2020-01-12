@@ -223,14 +223,6 @@ release {
     scmAdapters = [
             net.researchgate.release.GitAdapter
     ]
-
-//    git {
-//        requireBranch = details.branchName
-//        pushToRemote = 'origin'
-//        pushToBranchPrefix = ''
-//        commitVersionFileOnly = false
-//        signTag = false
-//    }
 }
 
 //######################################################
