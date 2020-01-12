@@ -15,23 +15,38 @@ jobs:
 #      - restore_cache:
 #          key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - run:
-          name: Install dependencies
+          name: Create Kube Home
           command: sudo mkdir -p /opt/mw/app/kube/ && sudo chmod 777 -R /opt/mw/app/kube/
       - run:
-          name: Install dependencies
+          name: Create Kube Logs
           command: sudo mkdir -p /opt/mw/mount/logs/kube/ && sudo chmod 777 -R /opt/mw/mount/logs/kube/
       - run:
-          name: Install dependencies
+          name: Add Kube Logback XML
           command: cp apps/admin/src/main/resources/logback-spring.xml /opt/mw/app/kube/logback-spring.xml
       - run:
-          name: Install dependencies
-          command: cd apps/admin && ./gradlew clean build
-      - run:
-          name: Install dependencies
-          command: cd apps/customers && ./gradlew clean build
-      - run:
-          name: Install dependencies
-          command: cd apps/users && ./gradlew clean build
+          name: Kube Admin CI
+          command: cd apps/admin && ./gradlew clean build && cp build/libs/*.jar apps/toolbox/kube/docker/build/
+#      - run:
+#          name: Kube Customers CI
+#          command: cd apps/customers && ./gradlew clean build
+#      - run:
+#          name: Kube Users CI
+#          command: cd apps/users && ./gradlew clean build
+      - setup_remote_docker:
+          docker_layer_caching: false
+      # build and push Docker image
+      - run: |
+          name: Kube Docker Build
+          command: cd apps/toolbox/kube/docker/build
+          TAG=0.1.$CIRCLE_BUILD_NUM
+#          docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
+#          docker build --build-arg kubeMicroservice=${MICROSERVICE} -t navikco/kube:${MICROSERVICE}-${VERSION} .
+          docker build -t --build-arg kubeMicroservice=admin -t navikco/kube:admin-${TAG} .
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+#          docker push CircleCI-Public/circleci-demo-docker:$TAG
+#          docker push navikco/kube:${MICROSERVICE}-${VERSION}
+          docker push navikco/kube:admin-${TAG}
+
 #      - save_cache:
 #          paths:
 #            - ~/.gradle/wrapper
