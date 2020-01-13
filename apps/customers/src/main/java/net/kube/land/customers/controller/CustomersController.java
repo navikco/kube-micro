@@ -28,12 +28,13 @@ public class CustomersController {
     public ResponseEntity<String> list() throws Exception {
 
         List<Customer> customers = Arrays.asList(
-            new Customer("100","Tony Stark","111.222.1000","TStark@avengers.io"),
-            new Customer("200","Steve Rogers","111.222.2000","SRogers@avengers.io"),
-            new Customer("300","Natasha Romanoff","111.222.3000","NRomanoff@avengers.io"),
-            new Customer("400","Bruce Banner","111.222.4000","BBanner@avengers.io"),
-            new Customer("500","Nick Fury","111.222.5000","NFury@avengers.io")
-    );
+                new Customer("100", "Tony Stark", "111.222.1000", "TStark@avengers.io"),
+                new Customer("200", "Steve Rogers", "111.222.2000", "SRogers@avengers.io"),
+                new Customer("300", "Natasha Romanoff", "111.222.3000", "NRomanoff@avengers.io"),
+                new Customer("400", "Bruce Banner", "111.222.4000", "BBanner@avengers.io"),
+                new Customer("500", "Clint Barton", "111.222.5000", "CBarton@avengers.io")
+//            new Customer("600","Nick Fury","111.222.6000","NFury@avengers.io")
+        );
 
         String responseString = objectMapper.writeValueAsString(customers);
 
@@ -43,6 +44,6 @@ public class CustomersController {
     @RequestMapping(value = "/{customerId}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> getCustomer(@PathVariable("customerId") String customerId) throws Exception {
 
-        return new ResponseEntity(new Customer(customerId,"Nick Fury","111.222.5000","NFury@avengers.io"), HttpStatus.OK);
+        return new ResponseEntity(new Customer(customerId, "Steve Rogers", "111.222.2000", "SRogers@avengers.io"), HttpStatus.OK);
     }
 }
