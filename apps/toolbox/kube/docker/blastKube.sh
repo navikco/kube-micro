@@ -81,7 +81,13 @@ cd ${KUBE_TOOLBOX_HOME}/build/
 
 echo "BUILDING :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]] in [[[ " + ${ENVIRONMENT} + " ]]]..."
 #docker build --build-arg kubeMicroservice=${MICROSERVICE} -t ${DOCKER_REGISTRY_HOST}:${DOCKER_REGISTRY_PORT}/${MICROSERVICE}:${VERSION} .
-docker build --build-arg kubeMicroservice=${MICROSERVICE} -t navikco/kube:${MICROSERVICE}-${VERSION} .
+docker build --build-arg kubeMicroservice=${MICROSERVICE} -t navikco/${MICROSERVICE}:${VERSION} .
+
+#docker rmi navikco/${MICROSERVICE}:latest | true
+#docker tag navikco/${MICROSERVICE}:${VERSION} navikco/${MICROSERVICE}:latest
+#docker push navikco/${MICROSERVICE}:${VERSION}
+#docker push navikco/${MICROSERVICE}:latest
+
 echo "BUILT :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]] in [[[ " + ${ENVIRONMENT} + " ]]]..."
 
 docker ps
@@ -109,7 +115,7 @@ docker run -dti \
     --memory="1g" --memory-swap="2g" \
     --name ${MICROSERVICE}-${VERSION} \
 	--mount type=bind,source="${KUBE_DOCKER_HOST_HOME}/mount",target=/opt/mw/mount \
-    navikco/kube:${MICROSERVICE}-${VERSION} ${ENVIRONMENT} ${MICROSERVICE} ${INSTANCE} 8761
+    navikco/${MICROSERVICE}:${VERSION} ${ENVIRONMENT} ${MICROSERVICE} ${INSTANCE} 8761
 echo "STARTED :::>>> KUBE Docker Container ::: [[[ " + ${MICROSERVICE} + " ]]] in [[[ " + ${ENVIRONMENT} + " ]]]..."
 
 docker ps

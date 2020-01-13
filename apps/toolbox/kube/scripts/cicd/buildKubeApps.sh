@@ -11,8 +11,6 @@ for kubeDir in apps/* ; do
 
     echo "KUBE>>>DOCKER>>>KUBERNETES ::: KUBE Microservice Directory ::: $kubeDir"
 
-    kubeDirectory="${bamboo_working_directory}/apps/toolbox/kube/scripts/cicd"
-
     kubeRelease=yes
 
     kubeDirTrim=${kubeDir:5}
@@ -64,6 +62,8 @@ for kubeDir in apps/* ; do
 
             cp ${kubeWorkingDirectory}/build/libs/*.jar ${kubeDockerWorkingDirectory}/
 
+            kubeDirectory="${bamboo_working_directory}/apps/toolbox/kube/scripts/cicd"
+
             ${kubeDirectory}/publishKubeDockerImage.sh ${bamboo_working_directory} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host}
 
             echo "$kubeDirTrim :::>>> Published KUBE Microservice Image on Docker Registry <<<$kubeVersion>>>"
@@ -93,7 +93,7 @@ id
 
 pwd
 
-${kubeDirectory}/deployKubePod.sh ${bamboo_kube_cluster} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host}
+/opt/mw/app/kube/install/scripts/cicd/deployKubePod.sh ${bamboo_kube_cluster} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host}
 
 EOF
 
