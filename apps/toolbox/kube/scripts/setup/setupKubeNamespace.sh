@@ -34,7 +34,7 @@ cd ${KUBE_LAND_DIR}/
 
 mkdir -p ${KUBE_LAND_DIR}/cluster/kube-${PROFILE}/
 
-PROFILE=${PROFILE} install/install/scripts/kube-templater.sh install/templates/kube-namespace.yml > ${KUBE_LAND_DIR}/cluster/kube-${PROFILE}/kube-${PROFILE}.yml
+PROFILE=${PROFILE} install/install/scripts/kube-templater.sh templates/kube-namespace.yml > ${KUBE_LAND_DIR}/cluster/kube-${PROFILE}/kube-${PROFILE}.yml
 
 cat ${KUBE_LAND_DIR}/cluster/kube-${PROFILE}/kube-${PROFILE}.yml
 

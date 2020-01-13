@@ -25,13 +25,13 @@ cd ${KUBE_HOME_DIR}/
 
 mkdir -p ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}
 
-PROFILE=${PROFILE} install/scripts/kube-templater.sh install/templates/kube-nfs.yml -f install/properties/kube-nfs.properties > ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/kube-${PROFILE}-nfs.yml
+PROFILE=${PROFILE} install/scripts/kube-templater.sh templates/kube-nfs.yml -f properties/kube-nfs.properties > ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/kube-${PROFILE}-nfs.yml
 
 cat ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/kube-${PROFILE}-nfs.yml
 
 kubectl create -f ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/kube-${PROFILE}-nfs.yml
 
-PROFILE=${PROFILE} install/scripts/kube-templater.sh install/templates/kube-nfs-claim.yml -f install/properties/kube-nfs.properties > ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/kube-${PROFILE}-nfs-claim.yml
+PROFILE=${PROFILE} install/scripts/kube-templater.sh templates/kube-nfs-claim.yml -f properties/kube-nfs.properties > ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/kube-${PROFILE}-nfs-claim.yml
 
 cat ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/kube-${PROFILE}-nfs-claim.yml
 

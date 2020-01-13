@@ -37,7 +37,7 @@ cd ${KUBE_HOME_DIR}/
 
 mkdir -p ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/
 
-MICROSERVICE=${MICROSERVICE} PROFILE=${PROFILE} PORT=${PORT} NODE_PORT=${NODE_PORT} TARGET_PORT=${TARGET_PORT} install/scripts/kube-templater.sh install/templates/kube-service.yml > ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/${MICROSERVICE}-service.yml
+MICROSERVICE=${MICROSERVICE} PROFILE=${PROFILE} PORT=${PORT} NODE_PORT=${NODE_PORT} TARGET_PORT=${TARGET_PORT} install/scripts/kube-templater.sh templates/kube-service.yml > ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/${MICROSERVICE}-service.yml
 
 cat ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/${MICROSERVICE}-service.yml
 

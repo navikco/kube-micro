@@ -6,4 +6,5 @@ echo "K8Dash Secrets --> $k8dashSecrets"
 
 for d in ../apps/* ; do
     echo "$d"
+    echo "KUBE>>>DOCKER>>>KUBERNETES ::: KUBE Domain ::: ${d:8}"
 done
