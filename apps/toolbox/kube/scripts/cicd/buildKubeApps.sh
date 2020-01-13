@@ -35,7 +35,7 @@ for kubeDir in apps/* ; do
 
         echo "$kubeDirTrim :::>>> Build Microservice <<<$kubeVersion>>>"
 
-        kubeWorkingDirectory="${bamboo_working_directory}/$kubeDirTrim/"
+        kubeWorkingDirectory="${bamboo_working_directory}/apps/$kubeDirTrim/"
 
         cd "${kubeWorkingDirectory}"
 
