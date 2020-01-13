@@ -20,9 +20,6 @@ then
     DOCKER_REGISTRY_PORT=${5}
     echo "DOCKER_REGISTRY_PORT :::>>> ${DOCKER_REGISTRY_PORT}"
 
-    DOCKER_RELEASE_TYPE=${6}
-    echo "DOCKER_RELEASE_TYPE :::>>> ${DOCKER_RELEASE_TYPE}"
-
     # Upgrade KUBE Kubernetes Deployment
     # ---------------------------------
 
@@ -51,7 +48,7 @@ then
     echo "Deployed :::>>> ${MICROSERVICE} : ${VERSION} in [[[${PROFILE}]]]!!!"
 
 else
-    echo "Usage: ./deployKubePod.sh <<PROFILE>> <<MICROSERVICE>> <<VERSION>> <<DOCKER_REGISTRY_HOST>> <<DOCKER_REGISTRY_PORT>> <<DOCKER_RELEASE_TYPE>>"
+    echo "Usage: ./deployKubePod.sh <<PROFILE>> <<MICROSERVICE>> <<VERSION>> <<DOCKER_REGISTRY_HOST>> <<DOCKER_REGISTRY_PORT>>"
     exit 1
 fi
 
