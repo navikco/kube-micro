@@ -9,7 +9,7 @@ then
     echo "PROFILE :::>>> ${PROFILE}"
 
 else
-    echo "Usage: . ./destroyKUBEKubeCluster.sh <<PROFILE>>"
+    echo "Usage: . ./destroyKubeCluster.sh <<PROFILE>>"
     exit 1
 fi
 

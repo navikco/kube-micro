@@ -14,6 +14,6 @@ id
 
 pwd
 
-/opt/mw/app/kube/install/scripts/scale/scaleKUBEResources.sh ${bamboo_kube_kube_cluster} ${bamboo_kube_microservice} ${bamboo_kube_microservice_replicas} ${bamboo_kube_microservice_resources_limits} ${bamboo_kube_microservice_resources_requests}
+/opt/mw/app/kube/install/scripts/scale/scaleKubeResources.sh ${bamboo_kube_cluster} ${bamboo_kube_microservice} ${bamboo_kube_microservice_replicas} ${bamboo_kube_microservice_resources_limits} ${bamboo_kube_microservice_resources_requests}
 
 EOF

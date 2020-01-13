@@ -93,7 +93,7 @@ id
 
 pwd
 
-/opt/mw/app/kube/scripts/cicd/deployKubePod.sh ${bamboo_kube_kube_cluster} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host}
+/opt/mw/app/kube/scripts/cicd/deployKubePod.sh ${bamboo_kube_cluster} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host}
 
 EOF
 

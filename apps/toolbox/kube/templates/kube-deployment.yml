@@ -15,28 +15,37 @@ spec:
   template:
     spec:
       containers:
-        name: {{MICROSERVICE}}
-        ports:
-        - containerPort: {{CONTAINER_PORT}}
-          protocol: TCP
-          name: kube-port
-        imagePullPolicy: IfNotPresent
-        image: {{REGISTRY_HOST}}:{{MICROSERVICE}}-{{VERSION}}
-        resources:
-          requests:
-            memory: "{{REQUEST_MEMORY}}"
-            cpu: "{{REQUEST_CPU}}"
-          limits:
-            memory: "{{LIMIT_MEMORY}}"
-            cpu: "{{LIMIT_CPU}}"
-        args: ["{{PROFILE}}", "{{MICROSERVICE}}", "{{ADMIN_HOST}}", "{{ADMIN_PORT}}"]
-        volumeMounts:
-        - mountPath: "/opt/mw/mount/kube"
-          name: kube-mount
+        - volumeMounts:
+            - mountPath: /opt/mw/mount
+              name: {{MICROSERVICE}}
+          name: {{MICROSERVICE}}
+          ports:
+            - containerPort: {{CONTAINER_PORT}}
+              protocol: TCP
+              name: kube-port
+          imagePullPolicy: IfNotPresent
+          image: {{REGISTRY_HOST}}/{{MICROSERVICE}}:{{VERSION}}
+          resources:
+            requests:
+              memory: "{{REQUEST_MEMORY}}"
+              cpu: "{{REQUEST_CPU}}"
+            limits:
+              memory: "{{LIMIT_MEMORY}}"
+              cpu: "{{LIMIT_CPU}}"
+          args: ["{{PROFILE}}", "{{MICROSERVICE}}", "{{ADMIN_HOST}}", "{{ADMIN_PORT}}"]
+          volumeMounts:
+            - mountPath: "/opt/mw/mount"
+              name: kube-mount
       volumes:
-      - name: kube-mount
-        persistentVolumeClaim:
-          claimName: kube-{{PROFILE}}-nfs
+        - name: kube-mount
+          persistentVolumeClaim:
+            claimName: kube-{{PROFILE}}-nfs
+      dnsConfig:
+        nameservers:
+          - "{{NAMESERVER_1}}"
+          - "{{NAMESERVER_2}}"
+        searches:
+          - "{{NAMESERVER_SEARCHES}}"
       restartPolicy: Always
     metadata:
       labels:

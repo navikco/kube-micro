@@ -40,7 +40,7 @@ cd ${KUBE_HOME_DIR}/
 
 mkdir -p ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/${MICROSERVICE}/
 
-MICROSERVICE=${MICROSERVICE} PROFILE=${PROFILE} VERSION=${VERSION} CONTAINER_PORT=${CONTAINER_PORT} ADMIN_HOST=${ADMIN_HOST} ADMIN_PORT=${ADMIN_PORT} install/scripts/kube-templater.sh templates/kube-deployment.yml -f properties/kube-deployment.properties > ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/${MICROSERVICE}/${MICROSERVICE}-deployment.yml
+MICROSERVICE=${MICROSERVICE} PROFILE=${PROFILE} VERSION=${VERSION} CONTAINER_PORT=${CONTAINER_PORT} ADMIN_HOST=${ADMIN_HOST} ADMIN_PORT=${ADMIN_PORT} install/scripts/kube-templater.sh install/templates/kube-deployment.yml -f install/properties/kube-deployment.properties > ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/${MICROSERVICE}/${MICROSERVICE}-deployment.yml
 
 cat ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/${MICROSERVICE}/${MICROSERVICE}-deployment.yml
 

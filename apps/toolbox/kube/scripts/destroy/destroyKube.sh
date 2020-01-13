@@ -14,7 +14,7 @@ id
 
 pwd
 
-/opt/mw/app/kube/install/scripts/destroy/destroyKUBEKubeCluster.sh ${bamboo_kube_kube_cluster}
+/opt/mw/app/kube/install/scripts/destroy/destroyKubeCluster.sh ${bamboo_kube_cluster}
 
 EOF
 

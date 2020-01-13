@@ -11,12 +11,12 @@ then
     VERSION=${2}
     echo "VERSION :::>>> ${VERSION}"
 
-    # Upgrade KUBE Kubernetes Deployment
-    # ---------------------------------
+    # Upgrade Kubernetes Deployment
+    # -----------------------------
 
     KUBE_HOME_DIR=/opt/mw/app/kube
 
-    echo "Deploying :::>>> ${MICROSERVICE} : ${VERSION} in [[[${bamboo_kube_kube_cluster}]]]!!!"
+    echo "Deploying :::>>> ${MICROSERVICE} : ${VERSION} in [[[${bamboo_kube_cluster}]]]!!!"
 
 ssh -o StrictHostKeyChecking=no ${bamboo_kube_admin_host} << EOF
 
@@ -28,18 +28,18 @@ id
 
 pwd
 
-/opt/mw/app/kube/install/scripts/cicd/deployKUBEKubernetesPod.sh ${bamboo_kube_kube_cluster} ${MICROSERVICE} ${VERSION} ${bamboo_kube_docker_registry_host} ${bamboo_kube_docker_registry_port} ${bamboo_kube_release_type}
+/opt/mw/app/kube/install/scripts/cicd/deployKubePod.sh ${bamboo_kube_cluster} ${MICROSERVICE} ${VERSION} ${bamboo_kube_docker_registry_host}
 
-if [ "${MICROSERVICE}" = "kube-admin" ]
+if [ "${MICROSERVICE}" = "admin" ]
 then
-    sleep 30
+    sleep 10
 else
     sleep 5
 fi
 
 EOF
 
-    echo "Deployed :::>>> ${MICROSERVICE} : ${VERSION} in [[[${bamboo_kube_kube_cluster}]]]!!!"
+    echo "Deployed :::>>> ${MICROSERVICE} : ${VERSION} in [[[${bamboo_kube_cluster}]]]!!!"
 
 elif [ $# -eq 1 ]
 then
@@ -47,10 +47,10 @@ then
     MICROSERVICE=${1}
     echo "MICROSERVICE :::>>> ${MICROSERVICE}"
 
-    echo "[[[SKIP]]] Deploying :::>>> ${MICROSERVICE} in [[[${bamboo_kube_kube_cluster}]]]!!!"
+    echo "[[[SKIP]]] Deploying :::>>> ${MICROSERVICE} in [[[${bamboo_kube_cluster}]]]!!!"
 
 else
-    echo "Usage: . ./deployKUBE.sh <<MICROSERVICE>> <<VERSION>>"
+    echo "Usage: . ./deployKube.sh <<MICROSERVICE>> <<VERSION>>"
     exit 1
 fi
 

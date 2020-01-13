@@ -21,7 +21,7 @@ then
     echo "REQUESTS :::>>> ${REQUESTS}"
 
 else
-    echo "Usage: . ./scaleKUBEResources.sh <<PROFILE>> <<MICROSERVICE>> <<REPLICAS>>"
+    echo "Usage: . ./scaleKubeResources.sh <<PROFILE>> <<MICROSERVICE>> <<REPLICAS>>"
     exit 1
 fi
 

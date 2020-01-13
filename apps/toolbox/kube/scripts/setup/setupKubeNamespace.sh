@@ -17,24 +17,15 @@ fi
 # -------------------------------
 
 KUBE_LAND_DIR=/opt/mw/app/kube
-#KUBE_LAND_SCRIPTS_DIR="`pwd`"/../../scripts/
-#KUBE_LAND_TEMPLATES_DIR="`pwd`"/../../templates/
-#KUBE_LAND_PROPERTIES_DIR="`pwd`"/../../properties/
-#echo "KUBE_LAND_SCRIPTS_DIR ::: ${KUBE_LAND_SCRIPTS_DIR}"
-#ls -lR ${KUBE_LAND_SCRIPTS_DIR}
 
 echo "KUBE_LAND_DIR ::: ${KUBE_LAND_DIR}"
 ls -lR ${KUBE_LAND_DIR}/
-
-#rsync -a ${KUBE_LAND_SCRIPTS_DIR} ${KUBE_LAND_DIR}/scripts/
-#rsync -a ${KUBE_LAND_TEMPLATES_DIR} ${KUBE_LAND_DIR}/templates/
-#rsync -a ${KUBE_LAND_PROPERTIES_DIR} ${KUBE_LAND_DIR}/properties/
 
 cd ${KUBE_LAND_DIR}/
 
 mkdir -p ${KUBE_LAND_DIR}/cluster/kube-${PROFILE}/
 
-PROFILE=${PROFILE} install/install/scripts/kube-templater.sh templates/kube-namespace.yml > ${KUBE_LAND_DIR}/cluster/kube-${PROFILE}/kube-${PROFILE}.yml
+PROFILE=${PROFILE} install/install/scripts/kube-templater.sh install/templates/kube-namespace.yml > ${KUBE_LAND_DIR}/cluster/kube-${PROFILE}/kube-${PROFILE}.yml
 
 cat ${KUBE_LAND_DIR}/cluster/kube-${PROFILE}/kube-${PROFILE}.yml
 

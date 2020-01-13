@@ -29,7 +29,7 @@ then
 
     cd ${KUBE_HOME_DIR}/
 
-    kubectl set image deployment.v1.apps/${MICROSERVICE}-deployment ${MICROSERVICE}=${DOCKER_REGISTRY_HOST}:${MICROSERVICE}-${VERSION} --record --namespace=kube-${PROFILE}
+    kubectl set image deployment.v1.apps/${MICROSERVICE}-deployment ${MICROSERVICE}=${DOCKER_REGISTRY_HOST}/${MICROSERVICE}:${VERSION} --record --namespace=kube-${PROFILE}
 
     kubectl get deployments --namespace=kube-${PROFILE}
 
