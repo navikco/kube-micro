@@ -57,11 +57,11 @@ for kubeDir in apps/* ; do
 
             echo "$kubeDirTrim :::>>> Publish KUBE Microservice Image on Docker Registry <<<$kubeVersion>>>"
 
-            kubeDockerWorkingDirectory="${bamboo_working_directory}/toolbox/kube/docker/build/"
+            kubeDockerWorkingDirectory="${bamboo_working_directory}/apps/toolbox/kube/docker/build/"
 
             cp ${kubeWorkingDirectory}/build/libs/*.jar ${kubeDockerWorkingDirectory}/
 
-            kubeKubeDirectory="${bamboo_working_directory}/toolbox/kube/scripts/cicd"
+            kubeKubeDirectory="${bamboo_working_directory}/apps/toolbox/kube/scripts/cicd"
 
             ${kubeKubeDirectory}/publishKubeDockerImage.sh ${bamboo_working_directory} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host} ${bamboo_kube_docker_registry_port} ${bamboo_kube_release_type}
 

@@ -61,7 +61,7 @@ docker ps
 
 docker images
 
-cd ${KUBE_HOME_DIR}/kube-toolbox/kube/docker/build/
+cd ${KUBE_HOME_DIR}/apps/toolbox/kube/docker/build/
 
 echo "BUILDING :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]]..."
 docker build --build-arg kubeMicroservice=${MICROSERVICE} -t ${DOCKER_REGISTRY_HOST}:${MICROSERVICE}-${VERSION} .
