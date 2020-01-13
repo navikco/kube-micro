@@ -7,7 +7,7 @@ ls -al ${bamboo_working_directory}
 
 echo "KUBE>>>DOCKER>>>KUBERNETES ::: Running on BAMBOO HOST :::>>> ${HOSTNAME}"
 
-for kubeDir in */ ; do
+for kubeDir in apps/ ; do
 
     echo "KUBE>>>DOCKER>>>KUBERNETES ::: KUBE Microservice Directory ::: $kubeDir"
 
