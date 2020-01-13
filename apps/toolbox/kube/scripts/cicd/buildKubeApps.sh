@@ -21,7 +21,7 @@ for kubeDir in apps/* ; do
         continue
     fi
 
-    if [ "$kubeDirTrim" == "toolbox" ]
+    if [ "$kubeDirTrim" == "toolbox" ] || [ "$kubeDirTrim" ==  "kube_hack.sh" ]
     then
         kubeRelease=no
         continue
