@@ -2,7 +2,7 @@
 
 set -e
 
-if [ $# -eq 6 ]
+if [ $# -eq 5 ]
 then
 
     PROFILE=${1}
@@ -10,9 +10,6 @@ then
 
     MICROSERVICE=${2}
     echo "MICROSERVICE :::>>> ${MICROSERVICE}"
-
-    VERSION=${3}
-    echo "VERSION :::>>> ${VERSION}"
 
     CONTAINER_PORT=${4}
     echo "CONTAINER_PORT :::>>> ${CONTAINER_PORT}"
@@ -24,7 +21,7 @@ then
     echo "ADMIN_PORT :::>>> ${ADMIN_PORT}"
 
 else
-    echo "Usage: . ./setupKubeDeployment.sh <<PROFILE>> <<MICROSERVICE>> <<VERSION>> <<CONTAINER_PORT>> <<ADMIN_HOST>> <<ADMIN_PORT>>"
+    echo "Usage: . ./setupKubeDeployment.sh <<PROFILE>> <<MICROSERVICE>> <<CONTAINER_PORT>> <<ADMIN_HOST>> <<ADMIN_PORT>>"
     exit 1
 fi
 
@@ -40,7 +37,7 @@ cd ${KUBE_HOME_DIR}/
 
 mkdir -p ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/${MICROSERVICE}/
 
-MICROSERVICE=${MICROSERVICE} PROFILE=${PROFILE} VERSION=${VERSION} CONTAINER_PORT=${CONTAINER_PORT} ADMIN_HOST=${ADMIN_HOST} ADMIN_PORT=${ADMIN_PORT} install/scripts/kube-templater.sh install/templates/kube-deployment.yml -f install/properties/kube-deployment.properties > ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/${MICROSERVICE}/${MICROSERVICE}-deployment.yml
+MICROSERVICE=${MICROSERVICE} PROFILE=${PROFILE} VERSION=latest CONTAINER_PORT=${CONTAINER_PORT} ADMIN_HOST=${ADMIN_HOST} ADMIN_PORT=${ADMIN_PORT} install/scripts/kube-templater.sh install/templates/kube-deployment.yml -f install/properties/kube-deployment.properties > ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/${MICROSERVICE}/${MICROSERVICE}-deployment.yml
 
 cat ${KUBE_HOME_DIR}/cluster/kube-${PROFILE}/${MICROSERVICE}/${MICROSERVICE}-deployment.yml
 
