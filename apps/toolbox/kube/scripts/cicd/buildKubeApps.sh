@@ -5,12 +5,6 @@ set -e
 echo "START @@@ KUBE>>>DOCKER>>>KUBERNETES ::: CURRENT DIRECTORY :::>>> ${bamboo_working_directory}"
 ls -al ${bamboo_working_directory}
 
-#Convert $MICROSERVICE to UNIX Format - i.e. kube-lookups to kube_lookups
-convertToUnix() {
-
-    echo "${kubeDirTrim}" | tr - _
-}
-
 echo "KUBE>>>DOCKER>>>KUBERNETES ::: Running on BAMBOO HOST :::>>> ${HOSTNAME}"
 
 for kubeDir in */ ; do
@@ -22,16 +16,13 @@ for kubeDir in */ ; do
     kubeDirTrim=${kubeDir%?}
     echo "KUBE>>>DOCKER>>>KUBERNETES ::: KUBE Domain ::: ${kubeDirTrim:4}"
 
-    if [ "$kubeDirTrim" == "kube-toolbox" ] || [ "$kubeDirTrim" == "artifacts" ]
+    if [ "$kubeDirTrim" == "toolbox" ]
     then
         kubeRelease=no
         continue
     fi
 
-    kubeDirTrimUnix="$(convertToUnix ${kubeDirTrim})"
-    echo "$kubeDirTrim :::>>> Evaluated kubeDirTrimUnix <<<${kubeDirTrimUnix}>>>"
-
-    eval "isReleasing=\${bamboo_${kubeDirTrimUnix}}"
+    eval "isReleasing=\${bamboo_${kubeDirTrim}}"
     echo "$kubeDirTrim :::>>> Evaluated isReleasing <<<${isReleasing}>>>"
 
     if [ "$isReleasing" == "yes"  ]
@@ -52,7 +43,7 @@ for kubeDir in */ ; do
 
         echo "$kubeDirTrim :::>>> Evaluated kubeVersion <<<${kubeVersion}>>>"
 
-        ./gradlew clean build sonarqube --no-daemon -Prelease.releaseVersion=${kubeVersion}_${bamboo_buildNumber}
+        ./gradlew clean build -no-daemon -Prelease.releaseVersion=${kubeVersion}_${bamboo_buildNumber}
 
         echo "$kubeDirTrim :::>>> Built KUBE Microservice DOCKER Image <<<$kubeVersion>>>"
 
@@ -61,13 +52,13 @@ for kubeDir in */ ; do
 
             echo "$kubeDirTrim :::>>> Publish KUBE Microservice Image on Docker Registry <<<$kubeVersion>>>"
 
-            kubeDockerWorkingDirectory="${bamboo_working_directory}/kube-toolbox/kube/docker/build/"
+            kubeDockerWorkingDirectory="${bamboo_working_directory}/toolbox/kube/docker/build/"
 
             cp ${kubeWorkingDirectory}/build/libs/*.jar ${kubeDockerWorkingDirectory}/
 
-            kubeKubeDirectory="${bamboo_working_directory}/kube-toolbox/kube/scripts/cicd"
+            kubeKubeDirectory="${bamboo_working_directory}/toolbox/kube/scripts/cicd"
 
-            ${kubeKubeDirectory}/publishKUBEDockerImage.sh ${bamboo_working_directory} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host} ${bamboo_kube_docker_registry_port} ${bamboo_kube_release_type}
+            ${kubeKubeDirectory}/publishKubeDockerImage.sh ${bamboo_working_directory} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host} ${bamboo_kube_docker_registry_port} ${bamboo_kube_release_type}
 
             echo "$kubeDirTrim :::>>> Published KUBE Microservice Image on Docker Registry <<<$kubeVersion>>>"
 
@@ -80,11 +71,6 @@ for kubeDir in */ ; do
         kubeRelease=no
         echo "$kubeDirTrim :::>>> [[[SKIP]]] Build Microservice <<<$kubeVersion>>>"
     fi
-
-#    if [ ! -z "${isReleasing}" ] && [ "${isReleasing}" != "yes"  ]
-#    then
-#        kubeVersion=${isReleasing}
-#    fi
 
     if [ "${bamboo_kube_docker_deploy}" = "yes" ] && [ "$kubeRelease" == "yes" ]
     then
@@ -101,7 +87,7 @@ id
 
 pwd
 
-/opt/mw/app/kube/install/scripts/cicd/deployKUBEKubernetesPod.sh ${bamboo_kube_kube_cluster} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host} ${bamboo_kube_docker_registry_port} ${bamboo_kube_release_type}
+/opt/mw/app/kube/scripts/cicd/deployKubePod.sh ${bamboo_kube_kube_cluster} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host} ${bamboo_kube_docker_registry_port} ${bamboo_kube_release_type}
 
 EOF
 

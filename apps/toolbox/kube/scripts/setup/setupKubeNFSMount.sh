@@ -9,7 +9,7 @@ then
     echo "PROFILE :::>>> ${PROFILE}"
 
 else
-    echo "Usage: . ./setupKUBENFSMount.sh <<PROFILE>>"
+    echo "Usage: . ./setupKubeNFSMount.sh <<PROFILE>>"
     exit 1
 fi
 

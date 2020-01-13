@@ -35,15 +35,15 @@ then
 
     cd ${KUBE_HOME_DIR}/
 
-    kubectl set image deployment.v1.apps/${MICROSERVICE}-deployment ${MICROSERVICE}=${DOCKER_REGISTRY_HOST}:${DOCKER_REGISTRY_PORT}/${MICROSERVICE}:${VERSION} --record --namespace=kube-${PROFILE}
+    kubectl set image deployment.v1.apps/${MICROSERVICE}-deployment ${MICROSERVICE}=${DOCKER_REGISTRY_HOST}:${MICROSERVICE}-${VERSION} --record --namespace=kube-${PROFILE}
 
     kubectl get deployments --namespace=kube-${PROFILE}
 
     kubectl describe deployment ${MICROSERVICE}-deployment --namespace=kube-${PROFILE}
 
-    if [ "${MICROSERVICE}" = "kube-admin" ]
+    if [ "${MICROSERVICE}" = "admin" ]
     then
-        sleep 30
+        sleep 10
     else
         sleep 5
     fi
@@ -51,7 +51,7 @@ then
     echo "Deployed :::>>> ${MICROSERVICE} : ${VERSION} in [[[${PROFILE}]]]!!!"
 
 else
-    echo "Usage: ./deployKUBEKubernetesPod.sh <<PROFILE>> <<MICROSERVICE>> <<VERSION>> <<DOCKER_REGISTRY_HOST>> <<DOCKER_REGISTRY_PORT>> <<DOCKER_RELEASE_TYPE>>"
+    echo "Usage: ./deployKubePod.sh <<PROFILE>> <<MICROSERVICE>> <<VERSION>> <<DOCKER_REGISTRY_HOST>> <<DOCKER_REGISTRY_PORT>> <<DOCKER_RELEASE_TYPE>>"
     exit 1
 fi
 

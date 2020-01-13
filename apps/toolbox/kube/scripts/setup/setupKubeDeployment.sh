@@ -24,7 +24,7 @@ then
     echo "ADMIN_PORT :::>>> ${ADMIN_PORT}"
 
 else
-    echo "Usage: . ./setupKUBEDeployment.sh <<PROFILE>> <<MICROSERVICE>> <<VERSION>> <<CONTAINER_PORT>> <<ADMIN_HOST>> <<ADMIN_PORT>>"
+    echo "Usage: . ./setupKubeDeployment.sh <<PROFILE>> <<MICROSERVICE>> <<VERSION>> <<CONTAINER_PORT>> <<ADMIN_HOST>> <<ADMIN_PORT>>"
     exit 1
 fi
 

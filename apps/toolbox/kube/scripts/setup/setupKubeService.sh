@@ -21,7 +21,7 @@ then
     echo "TARGET_PORT :::>>> ${TARGET_PORT}"
 
 else
-    echo "Usage: . ./setupKUBEService.sh <<PROFILE>> <<MICROSERVICE>> <<PORT>> <<NODE_PORT>> <<TARGET_PORT>>"
+    echo "Usage: . ./setupKubeService.sh <<PROFILE>> <<MICROSERVICE>> <<PORT>> <<NODE_PORT>> <<TARGET_PORT>>"
     exit 1
 fi
 

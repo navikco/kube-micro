@@ -6,8 +6,18 @@ metadata:
 spec:
   capacity:
     storage: {{STORAGE}}
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
-  nfs:
-    server: {{NFS_SERVER}}
-    path: "{{NFS_PATH}}"
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /opt/mw/mount/kube
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - example-node

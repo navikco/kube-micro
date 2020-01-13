@@ -24,7 +24,7 @@ then
     echo "DOCKER_RELEASE_TYPE :::>>> ${DOCKER_RELEASE_TYPE}"    
 
 else
-    echo "Usage: ./publishKUBEDockerImage.sh <<KUBE_HOME_DIR>> <<MICROSERVICE>> <<VERSION>> <<DOCKER_REGISTRY_HOST>> <<DOCKER_REGISTRY_PORT>> <<DOCKER_RELEASE_TYPE>>"
+    echo "Usage: ./publishKubeDockerImage.sh <<KUBE_HOME_DIR>> <<MICROSERVICE>> <<VERSION>> <<DOCKER_REGISTRY_HOST>> <<DOCKER_REGISTRY_PORT>> <<DOCKER_RELEASE_TYPE>>"
     exit 1
 fi
 
@@ -64,20 +64,17 @@ docker images
 cd ${KUBE_HOME_DIR}/kube-toolbox/kube/docker/build/
 
 echo "BUILDING :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]]..."
-docker build --build-arg kubeMicroservice=${MICROSERVICE} -t ${DOCKER_REGISTRY_HOST}:${DOCKER_REGISTRY_PORT}/${MICROSERVICE}:${VERSION} .
+docker build --build-arg kubeMicroservice=${MICROSERVICE} -t ${DOCKER_REGISTRY_HOST}:${MICROSERVICE}-${VERSION} .
 echo "BUILT :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]]..."
 
 docker ps
 
 docker images
 
-if [ "${DOCKER_REGISTRY_HOST}" = "mi-nexus01.dal.securustech.net" ]
-then
-    docker login -u EwsKubeNexus -p kubePassword1 ${DOCKER_REGISTRY_HOST}:${DOCKER_REGISTRY_PORT}
-fi
+docker login --username=navikco --password=Frisc0tx!
 
 echo "PUSHING :::>>> KUBE Docker Image to Docker Registry ::: [[[ " + ${MICROSERVICE} + " ]]]..."
-docker push ${DOCKER_REGISTRY_HOST}:${DOCKER_REGISTRY_PORT}/${MICROSERVICE}:${VERSION}
+docker push ${DOCKER_REGISTRY_HOST}:${MICROSERVICE}-${VERSION}
 echo "PUSHED :::>>> KUBE Docker Image to Docker Registry ::: [[[ " + ${MICROSERVICE} + " ]]]..."
 
 #Remove LOCAL Docker KUBE Image
