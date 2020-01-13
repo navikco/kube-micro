@@ -92,12 +92,12 @@ docker login --username=navikco --password=Frisc0tx!
 
 echo "PUSHING :::>>> KUBE Docker Image to Docker Registry ::: [[[ " + ${MICROSERVICE} + " ]]]..."
 #docker push ${DOCKER_REGISTRY_HOST}:${DOCKER_REGISTRY_PORT}/${MICROSERVICE}:${VERSION}
-docker push navikco/kube:${MICROSERVICE}-${VERSION}
+#docker push navikco/kube:${MICROSERVICE}-${VERSION}
 echo "PUSHED :::>>> KUBE Docker Image to Docker Registry ::: [[[ " + ${MICROSERVICE} + " ]]]..."
 
 #Remove LOCAL Docker KUBE Image
 echo "DELETING LOCAL :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]]..."
-docker rmi -f $(docker images | grep ${MICROSERVICE}) | true
+#docker rmi -f $(docker images | grep ${MICROSERVICE}) | true
 echo "DELETED LOCAL :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]]..."
 
 INSTANCE=$(ipconfig getifaddr en0)

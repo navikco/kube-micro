@@ -12,3 +12,12 @@ server:
   port: ${PORT:8761}
 
 ---
+
+spring:
+  profiles: local
+
+logging:
+  file: ./logs/\${spring.application.name}.log
+  config: ./src/main/resources/logback-spring.xml
+
+---
