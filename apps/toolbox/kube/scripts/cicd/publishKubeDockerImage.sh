@@ -2,7 +2,7 @@
 
 set -e
 
-if [ $# -eq 6 ]
+if [ $# -eq 5 ]
 then
 
     KUBE_HOME_DIR=${1}
@@ -20,11 +20,8 @@ then
     DOCKER_REGISTRY_PORT=${5}
     echo "DOCKER_REGISTRY_PORT :::>>> ${DOCKER_REGISTRY_PORT}"
 
-    DOCKER_RELEASE_TYPE=${6}
-    echo "DOCKER_RELEASE_TYPE :::>>> ${DOCKER_RELEASE_TYPE}"    
-
 else
-    echo "Usage: ./publishKubeDockerImage.sh <<KUBE_HOME_DIR>> <<MICROSERVICE>> <<VERSION>> <<DOCKER_REGISTRY_HOST>> <<DOCKER_REGISTRY_PORT>> <<DOCKER_RELEASE_TYPE>>"
+    echo "Usage: ./publishKubeDockerImage.sh <<KUBE_HOME_DIR>> <<MICROSERVICE>> <<VERSION>> <<DOCKER_REGISTRY_HOST>> <<DOCKER_REGISTRY_PORT>>"
     exit 1
 fi
 
