@@ -13,14 +13,14 @@ for kubeDir in apps/* ; do
 
     kubeRelease=yes
 
-    kubeDirTrim=${kubeDir:6}
+    kubeDirTrim=${kubeDir:5}
     echo "KUBE>>>DOCKER>>>KUBERNETES ::: KUBE Domain ::: ${kubeDirTrim}"
 
     if [ -f "${kubeDir}" ]; then
         kubeRelease=no
         continue
     fi
-    
+
     if [ "$kubeDirTrim" == "toolbox" ]
     then
         kubeRelease=no
