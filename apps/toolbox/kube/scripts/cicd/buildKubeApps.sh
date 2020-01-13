@@ -13,44 +13,41 @@ for kubeDir in apps/* ; do
 
     kubeRelease=yes
 
-    kubeDirTrim=${kubeDir%?}
-    echo "KUBE>>>DOCKER>>>KUBERNETES ::: KUBE Domain ::: ${kubeDirTrim:4}"
-
-    if [ "$kubeDirTrim" == "toolbox" ]
+    if [ "$kubeDir" == "toolbox" ]
     then
         kubeRelease=no
         continue
     fi
 
     eval "isReleasing=\${bamboo_${kubeDirTrim}}"
-    echo "$kubeDirTrim :::>>> Evaluated isReleasing <<<${isReleasing}>>>"
+    echo "$kubeDir :::>>> Evaluated isReleasing <<<${isReleasing}>>>"
 
     if [ "$isReleasing" == "yes"  ]
     then
 
-        echo "$kubeDirTrim :::>>> Build Microservice <<<$kubeVersion>>>"
+        echo "$kubeDir :::>>> Build Microservice <<<$kubeVersion>>>"
 
-        kubeWorkingDirectory="${bamboo_working_directory}/$kubeDirTrim/"
+        kubeWorkingDirectory="${bamboo_working_directory}/$kubeDir/"
 
         cd "${kubeWorkingDirectory}"
 
         while read line; do
             if  echo "$line" | grep -q "version="; then
-                echo "$kubeDirTrim :::>>> Evaluated GRADLE kubeVersion <<<${line}>>>";
+                echo "$kubeDir :::>>> Evaluated GRADLE kubeVersion <<<${line}>>>";
                 kubeVersion=${line:8}
             fi
         done < "gradle.properties"
 
-        echo "$kubeDirTrim :::>>> Evaluated kubeVersion <<<${kubeVersion}>>>"
+        echo "$kubeDir :::>>> Evaluated kubeVersion <<<${kubeVersion}>>>"
 
         ./gradlew clean build -no-daemon -Prelease.releaseVersion=${kubeVersion}_${bamboo_buildNumber}
 
-        echo "$kubeDirTrim :::>>> Built KUBE Microservice DOCKER Image <<<$kubeVersion>>>"
+        echo "$kubeDir :::>>> Built KUBE Microservice DOCKER Image <<<$kubeVersion>>>"
 
         if [ "${bamboo_kube_docker_publish}" = "yes" ]
         then
 
-            echo "$kubeDirTrim :::>>> Publish KUBE Microservice Image on Docker Registry <<<$kubeVersion>>>"
+            echo "$kubeDir :::>>> Publish KUBE Microservice Image on Docker Registry <<<$kubeVersion>>>"
 
             kubeDockerWorkingDirectory="${bamboo_working_directory}/toolbox/kube/docker/build/"
 
@@ -60,22 +57,22 @@ for kubeDir in apps/* ; do
 
             ${kubeKubeDirectory}/publishKubeDockerImage.sh ${bamboo_working_directory} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host} ${bamboo_kube_docker_registry_port} ${bamboo_kube_release_type}
 
-            echo "$kubeDirTrim :::>>> Published KUBE Microservice Image on Docker Registry <<<$kubeVersion>>>"
+            echo "$kubeDir :::>>> Published KUBE Microservice Image on Docker Registry <<<$kubeVersion>>>"
 
         else
-            echo "$kubeDirTrim :::>>> [[[SKIP]]] Publish KUBE Microservice Image on Docker Registry <<<$kubeVersion>>>"
+            echo "$kubeDir :::>>> [[[SKIP]]] Publish KUBE Microservice Image on Docker Registry <<<$kubeVersion>>>"
         fi
 
     else
         kubeVersion=${isReleasing}
         kubeRelease=no
-        echo "$kubeDirTrim :::>>> [[[SKIP]]] Build Microservice <<<$kubeVersion>>>"
+        echo "$kubeDir :::>>> [[[SKIP]]] Build Microservice <<<$kubeVersion>>>"
     fi
 
     if [ "${bamboo_kube_docker_deploy}" = "yes" ] && [ "$kubeRelease" == "yes" ]
     then
 
-        echo "$kubeDirTrim :::>>> Deploy KUBE Microservice Pod on Kubernetes Cluster <<<$kubeVersion>>>"
+        echo "$kubeDir :::>>> Deploy KUBE Microservice Pod on Kubernetes Cluster <<<$kubeVersion>>>"
 
 ssh -o StrictHostKeyChecking=no ${bamboo_kube_admin_host} << EOF
 
@@ -91,10 +88,10 @@ pwd
 
 EOF
 
-        echo "$kubeDirTrim :::>>> Deployed KUBE Microservice Pod on Kubernetes Cluster <<<$kubeVersion>>>"
+        echo "$kubeDir :::>>> Deployed KUBE Microservice Pod on Kubernetes Cluster <<<$kubeVersion>>>"
 
     else
-        echo "$kubeDirTrim :::>>> [[[SKIP]]] Deploy KUBE Microservice DOCKER Image <<<$kubeVersion>>>"
+        echo "$kubeDir :::>>> [[[SKIP]]] Deploy KUBE Microservice DOCKER Image <<<$kubeVersion>>>"
     fi
 
 done
