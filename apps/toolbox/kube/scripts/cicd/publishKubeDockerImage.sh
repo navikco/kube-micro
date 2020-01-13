@@ -68,6 +68,7 @@ docker images
 docker login --username=navikco --password=Frisc0tx!
 
 echo "PUSHING :::>>> KUBE Docker Image to Docker Registry ::: [[[ " + ${MICROSERVICE} + " ]]]..."
+docker rmi ${DOCKER_REGISTRY_HOST}/${MICROSERVICE}:latest | true
 docker tag ${DOCKER_REGISTRY_HOST}/${MICROSERVICE}:${VERSION} ${DOCKER_REGISTRY_HOST}/${MICROSERVICE}:latest
 docker push ${DOCKER_REGISTRY_HOST}/${MICROSERVICE}:${VERSION}
 docker push ${DOCKER_REGISTRY_HOST}/${MICROSERVICE}:latest
