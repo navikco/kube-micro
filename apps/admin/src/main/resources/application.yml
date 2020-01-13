@@ -67,39 +67,69 @@ zuul:
     socket-timeout-millis: 60000
   retryable: true
   routes:
-    users:
-      path: /kube/users/**
-      stripPrefix: false
-    roles:
-      path: /kube/roles/**
-      stripPrefix: false
-    customers:
-      path: /kube/customers/**
-      stripPrefix: false
-    products:
-      path: /kube/products/**
-      stripPrefix: false
-    orders:
-      path: /kube/orders/**
-      stripPrefix: false
-    invoices:
-      path: /kube/invoices/**
+    accounts:
+      path: /kube/accounts/**
       stripPrefix: false
     carts:
       path: /kube/carts/**
       stripPrefix: false
+    categories:
+      path: /kube/categories/**
+      stripPrefix: false
+    coupons:
+      path: /kube/coupons/**
+      stripPrefix: false
+    customers:
+      path: /kube/customers/**
+      stripPrefix: false
+    dues:
+      path: /kube/dues/**
+      stripPrefix: false
+    invoices:
+      path: /kube/invoices/**
+      stripPrefix: false
+    leads:
+      path: /kube/leads/**
+      stripPrefix: false
+    losts:
+      path: /kube/losts/**
+      stripPrefix: false
+    markets:
+      path: /kube/markets/**
+      stripPrefix: false
+    offers:
+      path: /kube/offers/**
+      stripPrefix: false
+    orders:
+      path: /kube/orders/**
+      stripPrefix: false
     payments:
       path: /kube/payments/**
       stripPrefix: false
-    subscriptions:
-      path: /kube/subscriptions/**
+    products:
+      path: /kube/products/**
+      stripPrefix: false
+    referrals:
+      path: /kube/referrals/**
+      stripPrefix: false
+    returns:
+      path: /kube/returns/**
+      stripPrefix: false
+    roles:
+      path: /kube/roles/**
       stripPrefix: false
     services:
       path: /kube/services/**
       stripPrefix: false
-    lists:
-      path: /kube/lists/**
+    subscriptions:
+      path: /kube/subscriptions/**
       stripPrefix: false
-    accounts:
-      path: /kube/accounts/**
+    users:
+      path: /kube/users/**
+      stripPrefix: false
+    vendors:
+      path: /kube/vendors/**
+      stripPrefix: false
+    wishlists:
+      path: /kube/wishlists/**
       stripPrefix: false

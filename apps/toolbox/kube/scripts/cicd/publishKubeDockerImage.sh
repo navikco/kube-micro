@@ -58,7 +58,7 @@ docker images
 cd ${KUBE_HOME_DIR}/apps/toolbox/kube/docker/build/
 
 echo "BUILDING :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]]..."
-docker build --build-arg kubeMicroservice=${MICROSERVICE} -t ${DOCKER_REGISTRY_HOST}:${MICROSERVICE}-${VERSION} .
+docker build --build-arg kubeMicroservice=${MICROSERVICE} -t ${DOCKER_REGISTRY_HOST}/${MICROSERVICE}:${VERSION} .
 echo "BUILT :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]]..."
 
 docker ps
@@ -68,7 +68,9 @@ docker images
 docker login --username=navikco --password=Frisc0tx!
 
 echo "PUSHING :::>>> KUBE Docker Image to Docker Registry ::: [[[ " + ${MICROSERVICE} + " ]]]..."
-docker push ${DOCKER_REGISTRY_HOST}:${MICROSERVICE}-${VERSION}
+docker tag ${DOCKER_REGISTRY_HOST}/${MICROSERVICE}:${VERSION} ${DOCKER_REGISTRY_HOST}/${MICROSERVICE}:latest
+docker push ${DOCKER_REGISTRY_HOST}/${MICROSERVICE}:${VERSION}
+docker push ${DOCKER_REGISTRY_HOST}/${MICROSERVICE}:latest
 echo "PUSHED :::>>> KUBE Docker Image to Docker Registry ::: [[[ " + ${MICROSERVICE} + " ]]]..."
 
 #Remove LOCAL Docker KUBE Image

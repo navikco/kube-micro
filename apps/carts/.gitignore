@@ -1,0 +1,26 @@
+.DS_Store
+
+# Intellij
+.idea/
+*.iml
+*.iws
+*.ipr
+*.zip
+*.tar
+*.gz
+*.log
+.classpath
+.settings
+.project
+bin/ 
+## Additional for IntelliJ
+**/build/
+build/
+classes/
+target/
+schema/
+data/
+logs/
+.gradle/
+out/
+repository/out/

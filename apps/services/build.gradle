@@ -1,0 +1,106 @@
+buildscript {
+
+    String buildNumber = System.getProperty("buildNumber")
+    if (buildNumber == null) {
+
+        buildNumber = System.getenv('buildNumber')
+    }
+    if (buildNumber == null) {
+
+        buildNumber = "0"
+    }
+
+    ext {
+        springBootVersion = '2.2.1.RELEASE'
+        springCloudVersion = '2.2.1.RELEASE'
+
+        kubeBuildNumber = buildNumber
+        buildTime = new Date().format("yyyy-MM-dd HH:mm:ss")
+        gitTagName = project.version
+    }
+
+    println "BuildNumber >>> " + kubeBuildNumber
+    println "BuildTime >>> " + buildTime
+
+    repositories {
+
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: "${springBootVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.7.RELEASE"
+    }
+}
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: "org.springframework.boot"
+
+apply plugin: io.spring.gradle.dependencymanagement.DependencyManagementPlugin
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+springBoot {
+
+    buildInfo {
+        properties {
+            additional = [
+                    'KubeBuildNumber': project.kubeBuildNumber,
+                    'BuildTime'      : project.buildTime
+            ]
+        }
+    }
+}
+
+
+
+println "|||GIT State||| :-> $project.name"
+println "<<<"
+println "\tProject Name :-> $project.name"
+println "\tProject Version :-> $project.version"
+println "\tBuild No# :-> $project.kubeBuildNumber"
+println "\tNEW GIT <<<TAG Name>>> :-> $project.gitTagName"
+println ">>>"
+
+println "CALLER@Gradle@buildNumber >>> " + project.kubeBuildNumber
+println "CALLER@Gradle@BuildTime >>> " + project.buildTime
+println "CALLER@Gradle@GitTagName >>> " + project.gitTagName
+
+repositories {
+
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+
+    compile group: 'org.json', name: 'json', version: '20190722'
+
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+
+    compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${springCloudVersion}")
+
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+
+    compile("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+}
+
+test {
+    systemProperties System.properties
+}
+
+bootJar {
+
+    println "JAR : RestDocRoot :-> $restDocRoot"
+    println "JAR : Base Name :-> " + baseName
+    println "JAR : Project Name :-> $project.name"
+    println "JAR : Project Version :-> $project.version"
+}

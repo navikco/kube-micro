@@ -27,7 +27,8 @@ for kubeDir in apps/* ; do
         continue
     fi
 
-    eval "isReleasing=\${bamboo_${kubeDirTrim}}"
+#    eval "isReleasing=\${bamboo_${kubeDirTrim}}"
+    isReleasing=yes
     echo "$kubeDirTrim :::>>> Evaluated isReleasing <<<${isReleasing}>>>"
 
     if [ "$isReleasing" == "yes"  ]
