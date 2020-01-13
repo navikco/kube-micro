@@ -1,9 +1,9 @@
 buildscript {
 
-    String buildNumber = System.getProperty("buildNumber")
+    String buildNumber = System.getProperty("bamboo_buildNumber")
     if (buildNumber == null) {
 
-        buildNumber = System.getenv('buildNumber')
+        buildNumber = System.getenv('bamboo_buildNumber')
     }
     if (buildNumber == null) {
 
