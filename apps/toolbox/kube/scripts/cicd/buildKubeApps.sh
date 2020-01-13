@@ -63,7 +63,7 @@ for kubeDir in apps/* ; do
 
             kubeKubeDirectory="${bamboo_working_directory}/apps/toolbox/kube/scripts/cicd"
 
-            ${kubeKubeDirectory}/publishKubeDockerImage.sh ${bamboo_working_directory} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host} ${bamboo_kube_docker_registry_port}
+            ${kubeKubeDirectory}/publishKubeDockerImage.sh ${bamboo_working_directory} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host}
 
             echo "$kubeDirTrim :::>>> Published KUBE Microservice Image on Docker Registry <<<$kubeVersion>>>"
 
@@ -92,7 +92,7 @@ id
 
 pwd
 
-/opt/mw/app/kube/scripts/cicd/deployKubePod.sh ${bamboo_kube_kube_cluster} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host} ${bamboo_kube_docker_registry_port}
+/opt/mw/app/kube/scripts/cicd/deployKubePod.sh ${bamboo_kube_kube_cluster} ${kubeDirTrim} ${kubeVersion}_${bamboo_buildNumber} ${bamboo_kube_docker_registry_host}
 
 EOF
 

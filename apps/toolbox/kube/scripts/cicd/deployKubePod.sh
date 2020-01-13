@@ -2,7 +2,7 @@
 
 set -e
 
-if [ $# -eq 6 ]
+if [ $# -eq 4 ]
 then
 
     PROFILE=${1}
@@ -16,9 +16,6 @@ then
 
     DOCKER_REGISTRY_HOST=${4}
     echo "DOCKER_REGISTRY_HOST :::>>> ${DOCKER_REGISTRY_HOST}"
-
-    DOCKER_REGISTRY_PORT=${5}
-    echo "DOCKER_REGISTRY_PORT :::>>> ${DOCKER_REGISTRY_PORT}"
 
     # Upgrade KUBE Kubernetes Deployment
     # ---------------------------------
@@ -48,7 +45,7 @@ then
     echo "Deployed :::>>> ${MICROSERVICE} : ${VERSION} in [[[${PROFILE}]]]!!!"
 
 else
-    echo "Usage: ./deployKubePod.sh <<PROFILE>> <<MICROSERVICE>> <<VERSION>> <<DOCKER_REGISTRY_HOST>> <<DOCKER_REGISTRY_PORT>>"
+    echo "Usage: ./deployKubePod.sh <<PROFILE>> <<MICROSERVICE>> <<VERSION>> <<DOCKER_REGISTRY_HOST>>"
     exit 1
 fi
 

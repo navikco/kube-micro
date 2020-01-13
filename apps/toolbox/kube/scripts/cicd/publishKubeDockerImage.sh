@@ -2,7 +2,7 @@
 
 set -e
 
-if [ $# -eq 5 ]
+if [ $# -eq 4 ]
 then
 
     KUBE_HOME_DIR=${1}
@@ -17,11 +17,8 @@ then
     DOCKER_REGISTRY_HOST=${4}
     echo "DOCKER_REGISTRY_HOST :::>>> ${DOCKER_REGISTRY_HOST}"
 
-    DOCKER_REGISTRY_PORT=${5}
-    echo "DOCKER_REGISTRY_PORT :::>>> ${DOCKER_REGISTRY_PORT}"
-
 else
-    echo "Usage: ./publishKubeDockerImage.sh <<KUBE_HOME_DIR>> <<MICROSERVICE>> <<VERSION>> <<DOCKER_REGISTRY_HOST>> <<DOCKER_REGISTRY_PORT>>"
+    echo "Usage: ./publishKubeDockerImage.sh <<KUBE_HOME_DIR>> <<MICROSERVICE>> <<VERSION>> <<DOCKER_REGISTRY_HOST>>"
     exit 1
 fi
 
