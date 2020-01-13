@@ -11,13 +11,13 @@ then
     MICROSERVICE=${2}
     echo "MICROSERVICE :::>>> ${MICROSERVICE}"
 
-    CONTAINER_PORT=${4}
+    CONTAINER_PORT=${3}
     echo "CONTAINER_PORT :::>>> ${CONTAINER_PORT}"
 
-    ADMIN_HOST=${5}
+    ADMIN_HOST=${4}
     echo "ADMIN_HOST :::>>> ${ADMIN_HOST}"
 
-    ADMIN_PORT=${6}
+    ADMIN_PORT=${5}
     echo "ADMIN_PORT :::>>> ${ADMIN_PORT}"
 
 else
