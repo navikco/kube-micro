@@ -26,7 +26,7 @@ _**Run Kubernetes Cluster Locally**_
     
         - Copy the **LONG Security Token** displayed on the Console by the last command and use it to Login on K8Dash UI 
     
-            http://localhost:8000/#!
+            http://localhost:8000/
 
         - If Your K8Dash UI is not up on Windows, you can run the PORT FORWARD command below and retry,
         
