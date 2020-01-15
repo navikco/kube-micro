@@ -2,6 +2,10 @@ pkill -f k8dash | true
 
 pkill -f 8761 | true
 
+pkill -f 8000 | true
+
+docker run zoobab/kind
+
 kind delete cluster --name kube-land | true
 
 kind create cluster --name kube-land --config kube-land-config.xml
@@ -50,4 +54,6 @@ kubectl port-forward deployment/admin-deployment 8761:8761 --namespace=kube-gree
 cd ../../
 
 ./kube-land-ui-access-key.sh
+
+#kubectl port-forward deployment/k8dash 8000:4654 --namespace=kube-system &
 

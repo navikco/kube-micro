@@ -26,8 +26,12 @@ _**Run Kubernetes Cluster Locally**_
     
         - Copy the **LONG Security Token** displayed on the Console by the last command and use it to Login on K8Dash UI 
     
-                http://localhost:8000/#!
+            http://localhost:8000/#!
 
+        - If Your K8Dash UI is not up on Windows, you can run the PORT FORWARD command below and retry,
+        
+            `kubectl port-forward deployment/k8dash 8000:4654 --namespace=kube-system &`
+        
     - You should be able to execute any **kubectl** Commands
     
     - To Check your Local Kubernetes Cluster,
@@ -38,7 +42,7 @@ _**Run Kubernetes Cluster Locally**_
 
         - Spring Boot Admin Console URL 
     
-            http://10.70.245.142:8761/admin/wallboard
+            http://localhost:8761/admin/wallboard
         
         - Microservice Endpoint
      
@@ -100,3 +104,13 @@ http://localhost:8761/admin/wallboard
 - Verify all **OTHER** Microservices on 
  
 http://localhost:8761/admin/wallboard
+
+
+
+_**Cleanup LOCAL Workspace once Done**_
+
+
+`kind delete cluster --name kube-land` 
+
+`docker stop zoobab/kind:latest`
+
