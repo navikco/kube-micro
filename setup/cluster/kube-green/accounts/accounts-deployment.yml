@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accounts-deployment
+  namespace: kube-green
+  labels:
+    app: accounts
+    purpose: kube-green-containers
+  annotations:
+    version: 'latest'
+spec:
+  selector:
+    matchLabels:
+      app: accounts
+  template:
+    spec:
+      containers:
+        - volumeMounts:
+            - mountPath: /opt/mw/mount
+              name: kube-mount
+          name: accounts
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: kube-port
+          imagePullPolicy: IfNotPresent
+          image: navikco/accounts:latest
+          resources:
+            requests:
+              memory: "150Mi"
+              cpu: "250m"
+            limits:
+              memory: "500Mi"
+              cpu: "1"
+          args: ["green", "accounts", "localhost", "30333"]
+      volumes:
+        - name: kube-mount
+          emptyDir: {}
+      dnsConfig:
+        nameservers:
+          - "172.16.32.66"
+          - "10.70.241.134"
+        searches:
+          - "lab.securustech.net"
+      restartPolicy: Always
+    metadata:
+      labels:
+        app: accounts
+  replicas: 1

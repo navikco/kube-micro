@@ -32,8 +32,8 @@ public class CustomersController {
                 new Customer("200", "Steve Rogers", "111.222.2000", "SRogers@avengers.io"),
                 new Customer("300", "Natasha Romanoff", "111.222.3000", "NRomanoff@avengers.io"),
                 new Customer("400", "Bruce Banner", "111.222.4000", "BBanner@avengers.io"),
-                new Customer("500", "Clint Barton", "111.222.5000", "CBarton@avengers.io"),
-            new Customer("600","Nick Fury","111.222.6000","NFury@avengers.io")
+                new Customer("500", "Clint Barton", "111.222.5000", "CBarton@avengers.io")
+//            new Customer("600","Nick Fury","111.222.6000","NFury@avengers.io")
         );
 
         String responseString = objectMapper.writeValueAsString(customers);
