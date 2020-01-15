@@ -16,18 +16,23 @@ _**Run Kubernetes Cluster Locally**_
 
 - It would also start the Kube Microservice Pods for admin & accounts
 
+- It would also print the **LONG Security Token** on the Console for K8Dash UI Login
+
 - More Kube Microservice Pods can be added as required
 
 - Once the Command exits with success,
+     
+    - You can Browse your K8Dash UI on --> 
+    
+        - Copy the **LONG Security Token** displayed on the Console by the last command and use it to Login on K8Dash UI 
+    
+                http://localhost:8000/#!
+
     - You should be able to execute any **kubectl** Commands
     
     - To Check your Local Kubernetes Cluster,
     
         `kubectl get nodes`
-     
-    - You can Browse your K8Dash UI on --> 
-    
-        http://localhost:8000/#!
 
     - Verify Microservices Deployment in your Local Kubernetes Cluster
 
