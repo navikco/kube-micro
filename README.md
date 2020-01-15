@@ -14,6 +14,10 @@ _**Run Kubernetes Cluster Locally**_
 
 - It would also start the Kubernetes Pod for K8Dash UI Dashboard
 
+- It would also start the Kube Microservice Pods for admin & accounts
+
+- More Kube Microservice Pods can be added as required
+
 - Once the Command exits with success,
     - You should be able to execute any **kubectl** Commands
     
@@ -23,39 +27,41 @@ _**Run Kubernetes Cluster Locally**_
      
     - You can Browse your K8Dash UI on --> 
     
-        `http://localhost:8000/#!`
+        http://localhost:8000/#!
 
-`cd kube/setup/cluster/kube-green/`
+    - Verify Microservices Deployment in your Local Kubernetes Cluster
 
-- To Deploy Test Apps/Microservices,
+        - Spring Boot Admin Console URL 
+    
+            http://10.70.245.142:8761/admin/wallboard
+        
+        - Microservice Endpoint
+     
+            `curl 'http://localhost:8761/kube/accounts' -i -X GET -H 'Accept: application/json'`
+
+
+
+- To Deploy Test Apps/Microservices Manually,
+
     - Run the **kubectl** commands below,
     
-    `kubectl create -f kube-green.yml`   (Creates Kubernetes Namespace)
+        `cd kube/setup/cluster/kube-green/`
+    
+        `kubectl create -f kube-green.yml`   (Creates Kubernetes Namespace)
           
-    `kubectl get namespaces`  (Should list **kube-green** Namespace)
+        `kubectl get namespaces`  (Should list **kube-green** Namespace)
     
-    `kubectl create -f admin-service.yml`  (Creates & Exposes **admin** Microservice as Kubernetes Service)
+        `kubectl create -f admin-service.yml`  (Creates & Exposes **admin** Microservice as Kubernetes Service)
     
-    `kubectl get services --namespace=kube-green`
+        `kubectl get services --namespace=kube-green`
     
-    `kubectl create -f admin/admin-deployment.yml`  (Creates **admin** Microservice Deployment)
+        `kubectl create -f admin/admin-deployment.yml`  (Creates **admin** Microservice Deployment)
     
-    `kubectl get pods --namespace=kube-green`
+        `kubectl get pods --namespace=kube-green`
     
-    `kubectl create -f accounts/accounts-deployment.yml`  (Creates **accounts** Microservice Deployment)
+        `kubectl create -f accounts/accounts-deployment.yml`  (Creates **accounts** Microservice Deployment)
     
-    `kubectl get pods --namespace=kube-green`
-
-- Verify Microservices Deployment in your Local Kubernetes Cluster
-
-    - Spring Boot Admin Console URL 
-    
-        `http://10.70.245.142:30333/admin/wallboard`
-        
-    - Microservice Endpoint
-     
-        `curl 'http://localhost:30333/kube/accounts' -i -X GET -H 'Accept: application/json'`
-
+        `kubectl get pods --namespace=kube-green`
 
 
 _**LOCALLY Build and Run Microservices Docker Images**_
