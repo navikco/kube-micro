@@ -32,7 +32,7 @@ spec:
             limits:
               memory: "500Mi"
               cpu: "1"
-          args: ["green", "accounts", "localhost", "30333"]
+          args: ["green", "accounts", "172.17.0.3", "30333"]
       volumes:
         - name: kube-mount
           emptyDir: {}

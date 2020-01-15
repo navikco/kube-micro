@@ -17,7 +17,7 @@ spec:
       containers:
         - volumeMounts:
             - mountPath: /opt/mw/mount
-              name: customers
+              name: kube-mount
           name: customers
           ports:
             - containerPort: 8080
@@ -32,14 +32,10 @@ spec:
             limits:
               memory: "500Mi"
               cpu: "1"
-          args: ["green", "customers", "10.70.245.142", "30333"]
-          volumeMounts:
-            - mountPath: "/opt/mw/mount"
-              name: kube-mount
+          args: ["green", "customers", "172.17.0.3", "30333"]
       volumes:
         - name: kube-mount
-          persistentVolumeClaim:
-            claimName: kube-green-nfs
+          emptyDir: {}
       dnsConfig:
         nameservers:
           - "172.16.32.66"

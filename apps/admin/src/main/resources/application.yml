@@ -61,6 +61,15 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    useDnsForFetchingServiceUrls: true
+    eurekaServerDNSName: eureka.local
+    eurekaServerPort: 8761
+    eurekaServerURLContext: eureka
+
 zuul:
   host:
     connect-timeout-millis: 60000

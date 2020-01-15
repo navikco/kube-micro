@@ -50,10 +50,42 @@ _**Run Kubernetes Cluster Locally**_
 
     - Spring Boot Admin Console URL 
     
-        `http://localhost:30333`
+        `http://10.70.245.142:30333/admin/wallboard`
         
     - Microservice Endpoint
      
         `curl 'http://localhost:30333/kube/accounts' -i -X GET -H 'Accept: application/json'`
 
 
+
+_**LOCALLY Build and Run Microservices Docker Images**_
+
+- Build & Run the **admin** Microservice first,
+    
+`cd apps/admin/`
+
+`./gradlew clean build`
+
+`cd apps/toolbox/kube/docker/`
+
+`./blastKube.sh green admin 8761 1.1.1` (Build & Run Microservice Docker Image)
+
+- Access **admin** Microservice on 
+ 
+http://localhost:8761/admin/wallboard
+
+ 
+- Build the **OTHER** Microservices now,
+
+   
+`cd apps/account/`  (You can change to any other Microservice here!)
+
+`./gradlew clean build`
+
+`cd apps/toolbox/kube/docker/`
+
+`./blastKube.sh green account 8080 1.1.1` (Build & Run Microservice Docker Image - Change Port for subsequent Microservices)
+
+- Verify all **OTHER** Microservices on 
+ 
+http://localhost:8761/admin/wallboard

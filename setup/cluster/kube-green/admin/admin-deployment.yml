@@ -32,16 +32,10 @@ spec:
             limits:
               memory: "500Mi"
               cpu: "1"
-          args: ["green", "admin", "localhost", "30301"]
+          args: ["green", "admin", "172.17.0.3", "8761"]
       volumes:
         - name: kube-mount
           emptyDir: {}
-      dnsConfig:
-        nameservers:
-          - "172.16.32.66"
-          - "10.70.241.134"
-        searches:
-          - "lab.securustech.net"
       restartPolicy: Always
     metadata:
       labels:
