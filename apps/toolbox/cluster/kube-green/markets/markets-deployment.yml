@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: markets-deployment
+  namespace: kube-green
+  labels:
+    app: markets
+    purpose: kube-green-containers
+  annotations:
+    version: 'latest'
+spec:
+  selector:
+    matchLabels:
+      app: markets
+  template:
+    spec:
+      containers:
+        - volumeMounts:
+            - mountPath: /opt/mw/mount
+              name: markets
+          name: markets
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: kube-port
+          imagePullPolicy: IfNotPresent
+          image: navikco/markets:latest
+          resources:
+            requests:
+              memory: "150Mi"
+              cpu: "250m"
+            limits:
+              memory: "500Mi"
+              cpu: "1"
+          args: ["green", "markets", "10.70.245.142", "30333"]
+          volumeMounts:
+            - mountPath: "/opt/mw/mount"
+              name: kube-mount
+      volumes:
+        - name: kube-mount
+          persistentVolumeClaim:
+            claimName: kube-green-nfs
+      dnsConfig:
+        nameservers:
+          - "172.16.32.66"
+          - "10.70.241.134"
+        searches:
+          - "lab.securustech.net"
+      restartPolicy: Always
+    metadata:
+      labels:
+        app: markets
+  replicas: 1
