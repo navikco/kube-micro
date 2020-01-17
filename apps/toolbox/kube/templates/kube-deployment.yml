@@ -40,12 +40,6 @@ spec:
         - name: kube-mount
           persistentVolumeClaim:
             claimName: kube-{{PROFILE}}-nfs
-      dnsConfig:
-        nameservers:
-          - "{{NAMESERVER_1}}"
-          - "{{NAMESERVER_2}}"
-        searches:
-          - "{{NAMESERVER_SEARCHES}}"
       restartPolicy: Always
     metadata:
       labels:

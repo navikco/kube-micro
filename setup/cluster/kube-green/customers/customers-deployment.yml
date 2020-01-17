@@ -36,12 +36,6 @@ spec:
       volumes:
         - name: kube-mount
           emptyDir: {}
-      dnsConfig:
-        nameservers:
-          - "172.16.32.66"
-          - "10.70.241.134"
-        searches:
-          - "lab.securustech.net"
       restartPolicy: Always
     metadata:
       labels:
