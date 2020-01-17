@@ -2,6 +2,18 @@
 
 _**Run Kubernetes Cluster Locally**_
 
+
+- Install Kind on your Local Machine (Mac or Windows Instructions below)
+
+    https://kind.sigs.k8s.io/docs/user/quick-start
+
+- Verify that Kind is properly installed by running the commands below,
+ 
+    `kind get clusters`
+    
+    `kind get nodes`
+
+
 `git clone https://github.com/navikco/kube.git`
 
 `cd kube/setup/`
