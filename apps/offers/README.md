@@ -1,60 +1,58 @@
-EWS Offers
+Kube Land Offers
 ===================================
 
-[![Build Status](http://es-compile01.dal.securustech.net/plugins/servlet/wittified/build-status/EP-EWCD)](http://es-compile01.dal.securustech.net/plugins/servlet/wittified/build-status/EP-EWCD)
+[![CircleCI](https://circleci.com/gh/navikco/kube.svg?style=svg)](https://circleci.com/gh/navikco/kube)
 [![Apache License 2](https://img.shields.io/badge/license-ASF2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 
 
-- Offers is a Microservice under Enterprise Webservices Platform (EWS)
+- Offers is a Microservice under Enterprise Webservices Platform (Kube Land)
 - It is Spring Boot Application uses Gradle and Rest API Doc
 - It packages as Executable JAR
 
 
-## EWS Offers Resources
+## Kube Land Offers Resources
 
 
 | **Useful URLs**	|
 | ------------- |
-| [Nexus Repo](http://es-nexus01.dal.securustech.net/content/repositories/releases/net/securustech/ews/ews-offers/ "Official Nexus Artifactory for EWS Offers")      	|
-| [Git Repo](http://es-bitbucket01.dal.securustech.net/projects/MID/repos/ews-offers/browse "Official Git Repo for EWS Offers")      	|
-| [Postman JSON](http://es-bitbucket01.dal.securustech.net/projects/MID/repos/ews-offers/browse/json_tests "Postman JSON for EWS Offers")      	|
-| [H2 In-memory DB - LOCAL](http://localhost:20036/ "H2 In-Memory DB Web Console for Local Testing")      	|
-| [EWS Admin Console - DEV](http://ld-midsrvcs01.lab.securustech.net:8761/#/ "EWS Admin Console - DEV Environment")      	|
-| [Rest API Doc - LOCAL](http://localhost:20026/ews/offers/info/index.html "EWS Offers Rest API Doc - Local Environment")      	|
-| [Rest API Doc - DEV](http://ld-midsrvcs01.lab.securustech.net:8761/offers/info/index.html "EWS Offers Rest API Doc - DEV Environment")      	|
-     	|
+| [DockerHub](https://hub.docker.com/repository/docker/navikco/offers/ "Official DockerHub Artifactory for Kube Land Offers")      	|
+| [GitHub](https://github.com/navikco/kube/tree/master/apps/offers "Official Git Repo for Kube Land Offers")      	|
+| [Postman JSON](https://github.com/navikco/kube/tree/master/apps/offers/browse/json_tests "Postman JSON for Kube Land Offers")      	|
+| [Kube Land Admin Console](http://localhost:8761/admin/wallboard "Kube Land Admin Console")      	|
+| [Rest API Doc](http://localhost:8761/kube/offers/info/index.html "Kube Land Offers Rest API Doc - Local Environment")      	|
+| [CircleCI](https://circleci.com/gh/navikco/kube "Kube Land - CI/CD")      	|
 
 
-## EWS Offers CI/CD
+## Kube Land Offers CI/CD
 
 
 | Job        | Type (Auto/Manual)	| Status  |Description  |
 | ------------- |:-------------:| -----:|-----:|
-| [**EWS Offers Ghosts CI**](http://es-compile01.dal.securustech.net/browse/EP-EWCD "EWS Offers CI Job")      | Auto | ![Build Status](http://es-compile01.dal.securustech.net/plugins/servlet/wittified/build-status/EP-EWCD)	| It triggers automatically when the Code changes are merged to the DEVELOP Branch.	|
-| [**EWS Offers CI**](http://es-compile01.dal.securustech.net/browse/EP-EWCD "EWS Offers CI Job")      | Auto | ![Build Status](http://es-compile01.dal.securustech.net/plugins/servlet/wittified/build-status/EP-EWCD)	| It triggers automatically when the Code changes are merged to the DEVELOP Branch.	|
-| [**EWS Offers DEV Release**](http://es-compile01.dal.securustech.net/browse/EP-EWSDR "EWS Offers Deploy to DEV")      | Manual | ![Deploy Status](http://es-compile01.dal.securustech.net/plugins/servlet/wittified/build-status/EP-EWSDR)	| It needs to be manually triggered once TeamForge Artifacts are Tagged and Release Notes URL is Verified. **release_version, next_version and other individual Apps being released need to be set** in Bamboo Plan Configuration prior to running this Job. |
-| [**EWS Offers RUNWAY**](http://es-compile01.dal.securustech.net/browse/EP-EWLR "EWS Offers Deploy to NEXUS Job")      | Manual | ![Deploy Status](http://es-compile01.dal.securustech.net/plugins/servlet/wittified/build-status/EP-EWLR)	| This Job is to upload Build, Package and Update the Release Deployables to NEXUS for QA, PP or PROD Deployments. It needs to be manually triggered once TeamForge Artifacts are Tagged and Release Notes URL is Verified. **release_version, next_version and other individual Apps being released need to be set** in Bamboo Plan Configuration prior to running this Job. |
-| [**EWS Offers TAKEOFF**](http://es-compile01.dal.securustech.net/browse/EP-EW "EWS Offers Install to QA Environment")      | Manual | ![Deploy Status](http://es-compile01.dal.securustech.net/plugins/servlet/wittified/build-status/EP-EW)	| This Job is to download desired Release Deployables from NEXUS to the QA Servers and Install them. It needs to be manually triggered once TeamForge Artifacts are Tagged and Release Notes URL is Verified. **release_version and other individual Apps being released need to be set** in Bamboo Plan Configuration prior to running this Job. |
-
-## Available Profiles to run EWS Offers Apps
+| [**Kube Land CI**](https://circleci.com/gh/navikco/kube "Kube Land CI Job")      | Auto | [![CircleCI](https://circleci.com/gh/navikco/kube.svg?style=svg)](https://circleci.com/gh/navikco/kube)	| It triggers automatically when the Code changes are merged to the master Branch	|
+| [**Kube Land CD**](https://circleci.com/gh/navikco/kube "Kube Land CD Job")      | Auto | [![CircleCI](https://circleci.com/gh/navikco/kube.svg?style=svg)](https://circleci.com/gh/navikco/kube)	| It triggers automatically when the Code changes are merged to the master Branch	|
+| [**Kube Land Init**](https://circleci.com/gh/navikco/kube "Kube Land Init Job")      | Manual | [![CircleCI](https://circleci.com/gh/navikco/kube.svg?style=svg)](https://circleci.com/gh/navikco/kube)	| Run it manually to Initialize Kube Land Cluster |
+| [**Kube Land Destroy**](https://circleci.com/gh/navikco/kube "Kube Land Destroy Job")      | Manual | [![CircleCI](https://circleci.com/gh/navikco/kube.svg?style=svg)](https://circleci.com/gh/navikco/kube)	| Run it manually to Destroy Kube Land Cluster |
+| [**Kube Land Scale**](https://circleci.com/gh/navikco/kube "Kube Land Scale Job")      | Manual | [![CircleCI](https://circleci.com/gh/navikco/kube.svg?style=svg)](https://circleci.com/gh/navikco/kube)	| Run it manually to Scale Up or Down Any Kube Land Cluster Resource/Microservice |
 
 
-| EWS Offers Profile        | Embedded/Externalized           | Description           |
+## Available Profiles to run Kube Land Offers Apps
+
+
+| Kube Land Offers Profile        | Embedded/Externalized           | Description           |
 | ------------- |:-------------:|:-------------:|
 | **local**      | Embedded In the Code    | Uses Dev Environment of DB, Kafka and other External Systems. |
 | **dev**      | Externalized on the Server    | Uses Dev Environment of DB, Kafka and other External Systems. |
-| **ews_dev**      | Embedded In the Code    | Uses Dev Environment of DB, Kafka and other External Systems. |
 | **qa**      | Externalized on the Server    | Uses QA Environment of DB, Kafka and other External Systems. |
-| **prod**      | N/A |
 
 
-## Build And Run ESP Apps
+
+## Build And Run Microservice App
 
 ```shell
 
-	cd ews-offers/
+	cd offers/
 	./gradlew clean build
-	java -jar -Dspring.profiles.active=local build/libs/ews-offers-1.0.0-SNAPSHOT.jar
+	java -jar -Dspring.profiles.active=local build/libs/offers-1.0.0-SNAPSHOT.jar
 
 
 ``` 
@@ -62,8 +60,8 @@ EWS Offers
 
 ## Test it out 
 
-* **Import** ews-offers/json_tests/Offers.postman_collection.json into your POSTMAN
-* **Fire up** the Postman Requests for EWS Offers Endpoints 
+* **Import** offers/json_tests/Offers.postman_collection.json into your POSTMAN
+* **Fire up** the Postman Requests for Kube Land Offers Endpoints 
 * **Verify** the Service Response in Postman
 
 

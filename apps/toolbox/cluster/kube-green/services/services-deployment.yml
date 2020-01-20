@@ -42,10 +42,10 @@ spec:
             claimName: kube-green-nfs
       dnsConfig:
         nameservers:
-          - "172.16.32.66"
-          - "10.70.241.134"
+          - "172.1.1.22"
+          - "10.1.1.22"
         searches:
-          - "lab.securustech.net"
+          - "lab.kubeland.net"
       restartPolicy: Always
     metadata:
       labels:

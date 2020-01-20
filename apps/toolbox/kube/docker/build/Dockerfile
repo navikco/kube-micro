@@ -10,8 +10,8 @@
 # HOW TO BUILD THIS IMAGE
 # -----------------------
 # Checkout All KUBE, ESP Microservices AND kube-toolbox under the same PARENT Directory - i.e. /opt/mw/kube/
-# Checkout Bitbucket Repo for KUBE/ESP Microservice - http://bitbucket.dal.securustech.net/scm/mid/<<MICROSERVICE>>.git
-# Checkout Bitbucket Repo for KUBE-TOOLBOX - http://bitbucket.dal.securustech.net/scm/mid/kube-toolbox.git
+# Checkout Bitbucket Repo for KUBE/ESP Microservice - http://bitbucket.dal.kubeland.net/scm/mid/<<MICROSERVICE>>.git
+# Checkout Bitbucket Repo for KUBE-TOOLBOX - http://bitbucket.dal.kubeland.net/scm/mid/kube-toolbox.git
 #
 # Run:
 #      $ cd <<PARENT_DIRECTORY>>/kube-toolbox/docker/kube

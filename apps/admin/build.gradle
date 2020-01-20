@@ -249,7 +249,7 @@ publishing {
         maven {
 
             name "nexus"
-            url "http://es-nexus01.dal.securustech.net/content/repositories/releases/"
+            url "http://es-nexus01.dal.kubeland.net/content/repositories/releases/"
         }
     }
 }

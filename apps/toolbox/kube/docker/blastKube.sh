@@ -60,13 +60,6 @@ docker rmi -f $(docker images | grep ${MICROSERVICE}) | true
 docker rmi -f $(docker images | grep none) | true
 echo "STOPPED :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]] in [[[ " + ${ENVIRONMENT} + " ]]]..."
 
-#docker exec kube-docker-registry rm -rf /var/lib/registry/docker/registry/v2/repositories/securus/mw/kube/
-#docker exec kube-docker-registry bin/registry garbage-collect --dry-run /etc/docker/registry/config.yml
-#docker exec kube-docker-registry bin/registry garbage-collect /etc/docker/registry/config.yml
-#
-#docker stop kube-docker-registry
-#docker start kube-docker-registry
-
 docker ps
 
 docker images
@@ -111,7 +104,7 @@ INSTANCE=$(ipconfig getifaddr en0)
 echo "STARTING :::>>> KUBE Docker Container ::: [[[ " + ${MICROSERVICE} + " ]]] in [[[ " + ${ENVIRONMENT} + " ]]] on [[[ " + ${INSTANCE} + " ]]]..."
 docker run -dti \
     -p ${PORT}:${PORT}/tcp \
-    --hostname=ld-midsrvcs06.lab.securustech.net \
+    --hostname=ld-midsrvcs06.lab.kubeland.net \
     --memory="1g" --memory-swap="2g" \
     --name ${MICROSERVICE}-${VERSION} \
 	--mount type=bind,source="${KUBE_DOCKER_HOST_HOME}/mount",target=/opt/mw/mount \
