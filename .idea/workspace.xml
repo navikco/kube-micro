@@ -1,60 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="266ada52-c69a-4a34-9e08-3a7d6e2e47c8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/accounts/README.md" afterPath="$PROJECT_DIR$/apps/accounts/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/admin/README.md" afterPath="$PROJECT_DIR$/apps/admin/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/admin/build.gradle" afterPath="$PROJECT_DIR$/apps/admin/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/carts/README.md" afterPath="$PROJECT_DIR$/apps/carts/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/categories/README.md" afterPath="$PROJECT_DIR$/apps/categories/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/coupons/README.md" afterPath="$PROJECT_DIR$/apps/coupons/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/customers/README.md" afterPath="$PROJECT_DIR$/apps/customers/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dues/README.md" afterPath="$PROJECT_DIR$/apps/dues/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/invoices/README.md" afterPath="$PROJECT_DIR$/apps/invoices/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/leads/README.md" afterPath="$PROJECT_DIR$/apps/leads/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/losts/README.md" afterPath="$PROJECT_DIR$/apps/losts/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/markets/README.md" afterPath="$PROJECT_DIR$/apps/markets/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/offers/README.md" afterPath="$PROJECT_DIR$/apps/offers/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/orders/README.md" afterPath="$PROJECT_DIR$/apps/orders/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/payments/README.md" afterPath="$PROJECT_DIR$/apps/payments/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/products/README.md" afterPath="$PROJECT_DIR$/apps/products/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/referrals/README.md" afterPath="$PROJECT_DIR$/apps/referrals/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/returns/README.md" afterPath="$PROJECT_DIR$/apps/returns/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/roles/README.md" afterPath="$PROJECT_DIR$/apps/roles/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/services/README.md" afterPath="$PROJECT_DIR$/apps/services/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/subscriptions/README.md" afterPath="$PROJECT_DIR$/apps/subscriptions/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/accounts/accounts-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/accounts/accounts-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/admin/admin-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/admin/admin-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/carts/carts-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/carts/carts-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/categories/categories-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/categories/categories-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/coupons/coupons-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/coupons/coupons-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/customers/customers-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/customers/customers-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/dues/dues-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/dues/dues-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/invoices/invoices-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/invoices/invoices-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/leads/leads-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/leads/leads-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/losts/losts-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/losts/losts-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/markets/markets-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/markets/markets-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/offers/offers-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/offers/offers-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/orders/orders-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/orders/orders-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/payments/payments-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/payments/payments-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/products/products-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/products/products-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/referrals/referrals-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/referrals/referrals-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/returns/returns-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/returns/returns-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/roles/roles-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/roles/roles-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/services/services-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/services/services-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/subscriptions/subscriptions-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/subscriptions/subscriptions-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/users/users-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/users/users-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/vendors/vendors-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/vendors/vendors-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/wishlists/wishlists-deployment.yml" afterPath="$PROJECT_DIR$/apps/toolbox/cluster/kube-green/wishlists/wishlists-deployment.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/kube/docker/blastKube.sh" afterPath="$PROJECT_DIR$/apps/toolbox/kube/docker/blastKube.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/kube/docker/build/Dockerfile" afterPath="$PROJECT_DIR$/apps/toolbox/kube/docker/build/Dockerfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/kube/properties/kube-deployment.properties" afterPath="$PROJECT_DIR$/apps/toolbox/kube/properties/kube-deployment.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/toolbox/kube/properties/kube-ns.properties" afterPath="$PROJECT_DIR$/apps/toolbox/kube/properties/kube-ns.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/users/README.md" afterPath="$PROJECT_DIR$/apps/users/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/vendors/README.md" afterPath="$PROJECT_DIR$/apps/vendors/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/wishlists/README.md" afterPath="$PROJECT_DIR$/apps/wishlists/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/cluster/kube-green/users/users-deployment.yml" afterPath="$PROJECT_DIR$/setup/cluster/kube-green/users/users-deployment.yml" />
-    </list>
+    <list default="true" id="266ada52-c69a-4a34-9e08-3a7d6e2e47c8" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -87,7 +34,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="330">
-                <caret line="22" column="46" lean-forward="true" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
+                <caret line="22" column="46" lean-forward="false" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -654,12 +601,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579534994089</updated>
-      <workItem from="1579534995449" duration="4204000" />
+      <workItem from="1579534995449" duration="4640000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4204000" />
+    <option name="totallyTimeSpent" value="4640000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="52" width="1769" height="1148" extended-state="0" />
@@ -737,7 +684,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="330">
-            <caret line="22" column="46" lean-forward="true" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
+            <caret line="22" column="46" lean-forward="false" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
             <folding />
           </first_editor>
           <second_editor />
