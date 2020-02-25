@@ -7,6 +7,15 @@ _**Run Kubernetes Cluster Locally**_
 
     https://kind.sigs.k8s.io/docs/user/quick-start
 
+- Install Chocolatey & Kind on your Local Machine (Only For Windows)
+
+    Open Command Shell with Administration Rights
+    
+    `Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))`
+
+    `choco install kind`
+
+
 - Verify that Kind is properly installed by running the commands below,
  
     `kind get clusters`
