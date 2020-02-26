@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accounts-deployment
+  namespace: kube-red
+  labels:
+    app: accounts
+    purpose: kube-red-containers
+  annotations:
+    version: 'latest'
+spec:
+  selector:
+    matchLabels:
+      app: accounts
+  template:
+    spec:
+      containers:
+        - volumeMounts:
+            - mountPath: /opt/mw/mount
+              name: kube-mount
+          name: accounts
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: kube-port
+          imagePullPolicy: IfNotPresent
+          image: navikco/accounts:latest
+          resources:
+            requests:
+              memory: "150Mi"
+              cpu: "250m"
+            limits:
+              memory: "500Mi"
+              cpu: "1"
+          args: ["red", "accounts", "172.17.0.3", "30333"]
+      volumes:
+        - name: kube-mount
+          emptyDir: {}
+      restartPolicy: Always
+    metadata:
+      labels:
+        app: accounts
+  replicas: 1

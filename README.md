@@ -1,6 +1,7 @@
 # Kube Land Demos
 
 _**Run Kubernetes Cluster Locally**_
+--
 
 
 - Install Kind on your Local Machine (Mac or Windows Instructions below)
@@ -14,7 +15,6 @@ _**Run Kubernetes Cluster Locally**_
     `Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))`
 
     `choco install kind`
-
 
 - Verify that Kind is properly installed by running the commands below,
  
@@ -95,6 +95,7 @@ _**Run Kubernetes Cluster Locally**_
 
 
 _**LOCALLY Build and Run Microservices Docker Images**_
+---
 
 - Build & Run the **admin** Microservice first,
     
@@ -129,9 +130,20 @@ http://localhost:8761/admin/wallboard
 
 
 _**Cleanup LOCAL Workspace once Done**_
+---
+
+`cd setup/scripts/` 
+
+`./kube-land-destroy.sh`
 
 
-`kind delete cluster --name kube-land` 
-
-`docker stop zoobab/kind:latest`
-
+_**Kube-Land Utility Scripts/Tools**_
+---
+| Tool/Script   | Argument(s) | Cluster	| K8Dash UI  | Namespace | Microservices | Purpose |
+| ------------- |:-------------:| -----:|-----:|-----:|-----:|-----:|
+| **kube-land-setup.sh** | Environment (i.e. blue/green) | Yes | Yes | Yes | Yes | Run Kind Docker Container and Setup New Kind Cluster with Namespace, K8Dash UI, Admin Service & Sample Microservices|
+| **kube-land-destroy.sh** | | Yes | Yes | Yes | Yes | Destroy Kind Cluster including Namespace, K8Dash UI, Admin Service & Sample Microservices|
+| **kube-land-blast.sh** | Environment (i.e. blue/green) | Yes | Yes | Yes | Yes | Setup New Kind Cluster with Namespace, K8Dash UI, Admin Service & Sample Microservices|
+| **kube-land-environment.sh** | Environment (i.e. blue/green) | | | Yes | Yes | Delete and Recreate Namespace, Admin Service & Sample Microservices|
+| **kube-land-k8dash-ui.sh** | | | Yes | | | Delete and Recreate K8Dash UI |
+| **kube-land-ui-access-key.sh** | | | | | | Display Secret Token to Logon to K8Dash UI|
