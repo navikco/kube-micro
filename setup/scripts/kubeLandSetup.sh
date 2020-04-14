@@ -2,14 +2,14 @@
 
 set -e
 
-if [ $# -eq 1 ]
+if [[ $# -eq 1 ]]
 then
 
     ENVIRONMENT=${1}
     echo "ENVIRONMENT :::>>> ${ENVIRONMENT}"
 
 else
-    echo "Usage: . ./kube-land-setup.sh <<ENVIRONMENT>>"
+    echo "Usage: . ./kubeLandSetup.sh <<ENVIRONMENT>>"
     exit 1
 fi
 
@@ -21,6 +21,8 @@ kind delete cluster --name kube-land | true
 
 echo "DESTROYED :::>>> Cluster ::: [[[ kube-land ]]]..."
 
-./kube-land-blast.sh ${ENVIRONMENT}
+./destroyKubeLandCluster.sh ${ENVIRONMENT}
+
+./kubeLandBlast.sh ${ENVIRONMENT}
 
 exit 0

@@ -2,7 +2,7 @@
 
 set -e
 
-if [ $# -eq 2 ]
+if [[ $# -eq 2 ]]
 then
 
     ENVIRONMENT=${1}
@@ -11,7 +11,7 @@ then
     MICROSERVICE=${2}
     echo "MICROSERVICE :::>>> ${MICROSERVICE}"
 else
-    echo "Usage: . ./kube-land-app.sh <<ENVIRONMENT>> <<MICROSERVICE>>"
+    echo "Usage: . ./setupKubeLandDeployment.sh <<ENVIRONMENT>> <<MICROSERVICE>>"
     exit 1
 fi
 
