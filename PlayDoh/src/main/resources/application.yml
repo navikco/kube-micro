@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: accounts
+    restDocName: accounts
+  security:
+    enabled: false
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${spring.application.name}
+  namespace: ${spring.profiles.active}
+  labels:
+    app: ${spring.application.name}
+    spring-boot: "true"
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+  selector:
+    app: ${spring.application.name}
+
+---
+
+info:
+  General:
+    Environment: ${spring.profiles.active}
+    Rest_API_Doc: http://${spring.adminServer.host}:${spring.adminServer.port}/kube/${spring.application.restDocName}/info/index.html
+    Endpoint(s):
+      - http://${spring.adminServer.host}:${spring.adminServer.port}/kube/${spring.application.restDocName}
+      - http://${spring.adminServer.host}:${spring.adminServer.port}/kube/${spring.application.restDocName}/{CUSTOMER_ID}
+    GIT Repo: 'https://github.com/navikco/kube/tree/master/apps/accounts'

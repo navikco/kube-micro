@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: accounts
+  profiles:
+    active: local
+
+logging:
+  file: /opt/mw/mount/logs/kube/${spring.application.name}/${spring.cloud.client.ip-address}/${spring.application.name}.log
+  config: /opt/mw/apps/kube/logback-spring.xml
+
+---
+
+spring:
+  profiles: local
+
+logging:
+  file: ./logs/\${spring.application.name}.log
+  config: ./src/main/resources/logback-spring.xml
+
+---
